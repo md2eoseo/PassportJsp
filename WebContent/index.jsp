@@ -1,9 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" import="java.util.*"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@	page import="java.util.*"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+	<meta charset="UTF-8">
 	<!-- 각 버전 중 가장 최신 표준 모드를 선택하는 문서 모드 -->
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <!-- 모바일기기의 물리적 화면 해상도를 웹페이지가 인식할 수 있게 해준다 -->
@@ -30,8 +30,8 @@
         <!-- sign in & up -->
         <div id="user_info">
             <div id="user_sign">
-                <div><a href="/login/auth?redirectUrl=%2F" class="link"><i class="fa fa-sign-in"></i> Log In</a></div>
-                <div><a href="/user/register" class="link">/sign up</a></div>
+                <div><a href="/Passport/Login.jsp" class="link"><i class="fa fa-sign-in"></i> Log In</a></div>
+                <div><a href="/Passport/memberInsert.jsp" class="link">/sign up</a></div>
             </div>
             <div id="signinuser_info">
 
