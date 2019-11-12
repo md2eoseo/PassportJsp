@@ -4,20 +4,18 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Sign up</title>
+<title>Login</title>
 </head>
 <body>
-	<h3>Sign up</h3>
+	<h3>Login</h3>
 	
 	${ error }
 	
-	<form action="memberInsert.do" method="POST">
+	<form action="memberLogin.do" method="POST">
 		ID : <input type="text" name="id"> <br>
 		비밀번호 : <input type="password" name="password"> <br>
-		이름 : <input type="text" name="name"> <br>
-		Email : <input type="text" name="mail"> <br>
 		
-		<input type="submit" value="회원가입">
+		<input type="submit" value="로그인">
 	</form>
 </body>
 </html>

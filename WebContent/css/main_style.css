@@ -110,12 +110,7 @@ article {
     border: 2px solid #000;
     margin: 3px;
     background-color: #fff;
-    opacity: 0.5;
-    animation: scale 1s 1;
     /* data들어오기전 */
-    text-align: center;
-    color: #000;
-    font-size: 5em;
     padding-top: 30px;
     box-sizing: border-box;
 }
@@ -124,11 +119,15 @@ article.article_block {
     float: left;
     width: 28%;
     height: 300px;
+    animation: scale 1s 1;
+    opacity: 0.8;
+    transform: scale(1.0);
+    transition: 0.5s;
 }
 
 article.article_block:hover {
-    width: 28%;
-    height: 300px;
+    opacity: 1.0;
+    transform: scale(1.1);
     /* animation: article_hover 0.5s 1; */
 }
 
@@ -136,9 +135,68 @@ article.article_top {
     margin-top: 70px;
 }
 
-article.signup_block {
+article.member_block {
     float: right;
     width: 38%;
     height: 680px;
     margin-right: 20px;
 }
+
+article.member_block input{
+    width: 100px;
+}
+
+article.member_block input.input_mail {
+    width: 150px;
+}
+
+article.member_block h3{
+    font-size: 28px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+article.member_block .welcome_block {
+	font-size: 32px;
+	font-weight: bold;
+	color: black;
+	text-align: center;
+	margin-bottom: 20px;
+}
+
+article.member_block .error_block {
+	font-size: 24px;
+	font-weight: bold;
+	color: red;
+	text-align: center;
+	margin-bottom: 20px;
+}
+
+article.member_block .info_block {
+	font-size: 24px;
+	font-weight: bold;
+	color: blue;
+	text-align: center;
+	margin-bottom: 20px;
+}
+
+article.member_block .login_block {
+	font-size: 18px;
+	margin-left: 30px;
+	margin-top: 50px;
+	margin-bottom: 50px;
+}
+
+article.member_block .signup_block {
+	font-size: 18px;
+	margin-left: 30px;
+	margin-top: 30px;
+	margin-bottom: 20px;
+}
+
+.submit_btn {
+	display: table; margin-left: auto; margin-right: auto; /* centered */
+	margin-top: 20px;
+}
+
+
