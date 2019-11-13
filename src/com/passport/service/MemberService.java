@@ -1,12 +1,12 @@
 package com.passport.service;
 
-import com.passport.dao.MemberDAO;
+import com.passport.dao.DBConnection;
 import com.passport.vo.MemberVO;
 
 public class MemberService {
 
 	private static MemberService service = new MemberService();
-	public MemberDAO dao = MemberDAO.getInstance();
+	public DBConnection dbcp = DBConnection.getInstance();
 	
 	private MemberService() {}
 	public static MemberService getInstance() {
@@ -14,19 +14,21 @@ public class MemberService {
 	}
 	
 	public void memberInsert(MemberVO member) {
-		dao.memberInsert(member);
+		dbcp.memberInsert(member);
 	}
 	
 	public MemberVO memberSearch(String id) {
-		MemberVO member = dao.memberSearch(id);
+		MemberVO member = dbcp.memberSearch(id);
 		return member;
 	}
 	
 	public void memberUpdate(MemberVO member) {
-		dao.memberUpdate(member);
+		dbcp.memberUpdate(member);
 	}
 	
 	public void memberDelete(String id) {
-		dao.memberDelete(id);
+		dbcp.memberDelete(id);
 	}
+	
+	
 }
