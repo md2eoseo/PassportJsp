@@ -30,7 +30,8 @@ public class MemberService {
 		dbcp.memberDelete(id);
 	}
 	
-	public int memberLogin(MemberVO member) {
-		return dbcp.memberLogin(member);
+	public int memberLogin(String id, String password) {
+		return dbcp.memberLogin(id, password);
 	}
+	
 }

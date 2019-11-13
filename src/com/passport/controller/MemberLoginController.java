@@ -5,7 +5,6 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 
 import com.passport.service.MemberService;
-import com.passport.vo.MemberVO;
 
 public class MemberLoginController implements Controller {
 	public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException ,IOException {
@@ -20,18 +19,21 @@ public class MemberLoginController implements Controller {
 			HttpUtil.forward(req, resp, "/index.jsp");
 			return;
 		}
-		
-		MemberVO member = new MemberVO();
-		member.setId(id);
-		member.setPassword(password);
-		
+
 		MemberService service = MemberService.getInstance();
-		status = service.memberLogin(member);
+		status = service.memberLogin(id, password);
+		
+		HttpSession session = req.getSession();
 		
 		if(status == 1) {
-			req.setAttribute("id", id);
-			req.setAttribute("info", "님 환영합니다!");
-			HttpUtil.forward(req, resp, "/index.jsp");
+			if(session.isNew() || session.getAttribute("userid") == null){
+				session.setAttribute("userid", id);
+				req.setAttribute("info", id + "님 환영합니다!");
+				HttpUtil.forward(req, resp, "/index.jsp");
+			} else {
+				req.setAttribute("info", session.getAttribute("userid") + "님이 현재 로그인 상태입니다!<br>사용자를 바꾸시려면 로그아웃을 해주세요!");
+				HttpUtil.forward(req, resp, "/index.jsp");
+			}
 		} else if(status == 0) {
 			req.setAttribute("error", "비밀번호가 불일치합니다!");
 			HttpUtil.forward(req, resp, "/index.jsp");

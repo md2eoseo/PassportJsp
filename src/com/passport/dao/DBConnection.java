@@ -153,7 +153,7 @@ public class DBConnection
 		}
 	}
 	
-	public int memberLogin(MemberVO member) {
+	public int memberLogin(String id, String password) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -164,11 +164,11 @@ public class DBConnection
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement("select * from member where id=?");
-			pstmt.setString(1, member.getId());
+			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				dbPW = rs.getString("password");
-				if(dbPW.equals(member.getPassword())) {
+				if(dbPW.equals(password)) {
 					System.out.println("비밀번호 일치");
 					x = 1;
 				} else {
@@ -186,4 +186,5 @@ public class DBConnection
 		
 		return x;
 	}
+	
 }

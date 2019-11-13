@@ -31,9 +31,7 @@ public class MemberInsertController implements Controller {
 		MemberService service = MemberService.getInstance();
 		service.memberInsert(member);
 		
-		req.setAttribute("id", id);
-		req.setAttribute("info", "님 회원가입이 완료되었습니다!");
+		req.setAttribute("info", id + "님 회원가입이 완료되었습니다!");
 		HttpUtil.forward(req, resp, "/index.jsp");
-//		HttpUtil.forward(req, resp, "/result/memberInsertOutput.jsp");
 	};
 }

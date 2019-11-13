@@ -45,21 +45,21 @@ header {
     margin-bottom: 20px;
 }
 
-#user_info {
+.user_info {
     height: 200px;
     border: thin dotted black;
     margin-bottom: 8px;
 }
 
-#user_sign {
+.user_do {
     margin-top: 3px;
     margin-left: 5px;
     height: 40px;
 }
 
-#user_sign div {
+.user_do div {
     display: inline-block;
-    font-size: 16px;
+    font-size: 14px;
     width: 80px;
     height: 40px;
     padding-top: 5px;

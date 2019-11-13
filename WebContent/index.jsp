@@ -28,12 +28,19 @@
         </h1>
 
         <!-- sign in & up -->
-        <div id="user_info">
-            <div id="user_sign">
-                <div><a href="/Passport/memberLogin.jsp" class="link"><i class="fa fa-sign-in"></i> 로그인</a></div>
-                <div><a href="/Passport/memberInsert.jsp" class="link">/회원 가입</a></div>
+        <div class="user_info">
+            <div class="user_do">
+                <% 
+                	if(session.getAttribute("userid") == null){
+                		out.println("<div><a href=''/Passport/memberLogin.jsp' class='link'><i class='fa fa-sign-in'></i> 로그인</a></div>"
+                				+ "<div><a href='/Passport/memberInsert.jsp' class='link'>/회원 가입</a></div>");
+                	} else {
+                		out.println("<div><a href='/Passport/memberLogout.do' class='link'><i class='fa fa-sign-out'></i> 로그아웃</a></div>"
+                				+ "<div><a href='/Passport/post.jsp' class='link'><i class='fa fa-book'></i> 글쓰기</a></div>");
+                	} 
+                %>
             </div>
-            <div id="signinuser_info">
+            <div class="signinuser_info">
 
             </div>
         </div>
@@ -75,7 +82,7 @@
             
             	<div class="welcome_block">웰컴웰컴</div>
             	<div class="error_block">${ error }</div>
-            	<div class="info_block">${ id }${ info }</div>
+            	<div class="info_block">${ info }</div>
             	
 				<div class="login_block">
 					<h3>로그인</h3>
