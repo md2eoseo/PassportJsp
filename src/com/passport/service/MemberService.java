@@ -30,5 +30,7 @@ public class MemberService {
 		dbcp.memberDelete(id);
 	}
 	
-	
+	public int memberLogin(MemberVO member) {
+		return dbcp.memberLogin(member);
+	}
 }

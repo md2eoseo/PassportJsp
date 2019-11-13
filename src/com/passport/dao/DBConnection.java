@@ -1,7 +1,7 @@
 package com.passport.dao;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
+// import java.sql.DriverManager; jdbc 프로그램으로 구현했을 때 사용
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -42,50 +42,50 @@ public class DBConnection
         
 	}
 	
-	public Connection connect() {
-		Connection conn = null;
-		try {
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-			conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "scott", "tiger");
-		} catch (Exception ex) {
-			System.out.println("Error : " + ex);
-		}
-		return conn;
-	}
-	
-	public void close(Connection conn, PreparedStatement ps, ResultSet rs) {
-		if(rs != null) {
-			try {
-				rs.close();
-			} catch (Exception ex) {
-				System.out.println("Error : rs.close() " + ex);
-			}
-		}
-		close(conn, ps);
-	}
-	
-	public void close(Connection conn, PreparedStatement ps) {
-		if(ps != null) {
-			try {
-				ps.close();
-			} catch (Exception ex) {
-				System.out.println("Error : ps.close() " + ex);
-			}
-		}
-		if(conn != null) {
-			try {
-				conn.close();
-			} catch (Exception ex) {
-				System.out.println("Error : conn.close() " + ex);
-			}
-		}
-	}
+//	public Connection connect() {
+//		Connection conn = null;
+//		try {
+//			Class.forName("oracle.jdbc.driver.OracleDriver");
+//			conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "scott", "tiger");
+//		} catch (Exception ex) {
+//			System.out.println("Error : " + ex);
+//		}
+//		return conn;
+//	}
+//	
+//	public void close(Connection conn, PreparedStatement ps, ResultSet rs) {
+//		if(rs != null) {
+//			try {
+//				rs.close();
+//			} catch (Exception ex) {
+//				System.out.println("Error : rs.close() " + ex);
+//			}
+//		}
+//		close(conn, ps);
+//	}
+//	
+//	public void close(Connection conn, PreparedStatement ps) {
+//		if(ps != null) {
+//			try {
+//				ps.close();
+//			} catch (Exception ex) {
+//				System.out.println("Error : ps.close() " + ex);
+//			}
+//		}
+//		if(conn != null) {
+//			try {
+//				conn.close();
+//			} catch (Exception ex) {
+//				System.out.println("Error : conn.close() " + ex);
+//			}
+//		}
+//	}
 	
 	public void memberInsert(MemberVO member) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		try {
-			conn = connect();
+			conn = getConnection();
 			pstmt = conn.prepareStatement("insert into member values(?,?,?,?)");
 			pstmt.setString(1, member.getId());
 			pstmt.setString(2, member.getPassword());
@@ -94,8 +94,6 @@ public class DBConnection
 			pstmt.executeUpdate();			
 		} catch (Exception ex) {
 			System.out.println("Error : " + ex);
-		} finally {
-			close(conn, pstmt);
 		}
 	}
 	
@@ -107,7 +105,7 @@ public class DBConnection
 		MemberVO member = null;
 		
 		try {
-			conn = connect();
+			conn = getConnection();
 			pstmt = conn.prepareStatement("select * form member where id=?");
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
@@ -120,8 +118,6 @@ public class DBConnection
 			}
 		} catch (Exception ex) {
 			System.out.println("Error : " + ex);
-		} finally {
-			close(conn, pstmt, rs);
 		}
 		
 		return member;
@@ -131,7 +127,7 @@ public class DBConnection
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		try {
-			conn = connect();
+			conn = getConnection();
 			pstmt = conn.prepareStatement("update member set password=?, name=?, mail=? where id=?");
 			pstmt.setString(1, member.getPassword());
 			pstmt.setString(2, member.getName());
@@ -140,8 +136,6 @@ public class DBConnection
 			pstmt.executeUpdate();			
 		} catch (Exception ex) {
 			System.out.println("Error : " + ex);
-		} finally {
-			close(conn, pstmt);
 		}
 	}
 	
@@ -149,15 +143,47 @@ public class DBConnection
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		try {
-			conn = connect();
+			conn = getConnection();
 			pstmt = conn.prepareStatement("delete from member where id=?");
 			pstmt.setString(1, id);
 			pstmt.executeUpdate();			
 
 		} catch (Exception ex) {
 			System.out.println("Error : " + ex);
-		} finally {
-			close(conn, pstmt);
 		}
+	}
+	
+	public int memberLogin(MemberVO member) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String dbPW;
+		int x = -1;
+		
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement("select * from member where id=?");
+			pstmt.setString(1, member.getId());
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				dbPW = rs.getString("password");
+				if(dbPW.equals(member.getPassword())) {
+					System.out.println("비밀번호 일치");
+					x = 1;
+				} else {
+					System.out.println("비밀번호 불일치");
+					x = 0;
+				}
+			} else {
+				System.out.println("존재하지 않는 아이디 입력");
+				x = -1;
+			}
+			
+		} catch (Exception ex) {
+			System.out.println("Error : " + ex);
+		}
+		
+		return x;
 	}
 }

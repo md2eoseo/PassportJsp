@@ -12,6 +12,7 @@ public class MemberLoginController implements Controller {
 		
 		String id = req.getParameter("id");
 		String password = req.getParameter("password");
+		int status = -1;
 
 		// error
 		if(id.isEmpty() || password.isEmpty()) {
@@ -25,10 +26,18 @@ public class MemberLoginController implements Controller {
 		member.setPassword(password);
 		
 		MemberService service = MemberService.getInstance();
-//		service.memberInsert(member);
+		status = service.memberLogin(member);
 		
-		req.setAttribute("id", id);
-		req.setAttribute("info", "님 환영합니다!");
-		HttpUtil.forward(req, resp, "/index.jsp");
+		if(status == 1) {
+			req.setAttribute("id", id);
+			req.setAttribute("info", "님 환영합니다!");
+			HttpUtil.forward(req, resp, "/index.jsp");
+		} else if(status == 0) {
+			req.setAttribute("error", "비밀번호가 불일치합니다!");
+			HttpUtil.forward(req, resp, "/index.jsp");
+		} else if(status == -1) {
+			req.setAttribute("error", "존재하지 않는 아이디입니다!");
+			HttpUtil.forward(req, resp, "/index.jsp");
+		}
 	};
 }
