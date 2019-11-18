@@ -2,6 +2,7 @@ package com.passport.service;
 
 import com.passport.dao.DBConnection;
 import com.passport.vo.MemberVO;
+import com.passport.vo.PostVO;
 
 public class MemberService {
 
@@ -34,4 +35,7 @@ public class MemberService {
 		return dbcp.memberLogin(id, password);
 	}
 	
+	public int postCreate(PostVO post) {
+		return dbcp.postCreate(post);
+	}
 }

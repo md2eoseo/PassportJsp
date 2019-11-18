@@ -12,6 +12,7 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import com.passport.vo.MemberVO;
+import com.passport.vo.PostVO;
  
 public class DBConnection 
 {
@@ -37,7 +38,7 @@ public class DBConnection
         
         Context context = new InitialContext();
         DataSource dataSource = (DataSource) context.lookup("java:comp/env/jdbc/xe");
-        Connection conn = dataSource.getConnection(); 
+        Connection conn = dataSource.getConnection();
         return conn;
         
 	}
@@ -187,4 +188,54 @@ public class DBConnection
 		return x;
 	}
 	
+	public int getSeq(){
+        int result = 1;
+        Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs;
+        
+        try {
+            conn = DBConnection.getConnection();
+            
+            // 시퀀스 값을 가져온다. (DUAL : 시퀀스 값을 가져오기위한 임시 테이블)
+            StringBuffer sql = new StringBuffer();
+            sql.append("SELECT BOARD_NUM.NEXTVAL FROM DUAL");
+            
+            pstmt = conn.prepareStatement(sql.toString());
+
+            rs = pstmt.executeQuery();
+            
+            if(rs.next())
+            	result = rs.getInt(1);
+ 
+        } catch (Exception e) {
+            throw new RuntimeException(e.getMessage());
+        }
+        
+        return result;    
+    }
+	
+	public int postCreate(PostVO post) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement("insert into post values(?,?,?,?,?,?,?,?,?,sysdate)");
+			pstmt.setInt(1, getSeq());
+			pstmt.setString(2, post.getBoard_id());
+			pstmt.setString(3, post.getBoard_subject());
+			pstmt.setString(4, post.getBoard_content());
+			pstmt.setString(5, post.getBoard_file());
+            pstmt.setString(6, "test");
+            pstmt.setInt(7, 0);
+            pstmt.setInt(8, 0);
+            pstmt.setInt(9, 0);
+			pstmt.executeUpdate();
+			return 1;
+		} catch (Exception ex) {
+			System.out.println("Error : " + ex);
+			return -1;
+		}
+	}
 }
