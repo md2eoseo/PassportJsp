@@ -15,6 +15,21 @@
             text-align :center;
         }
     </style>
+    <script type="text/javascript">
+    function check() {
+    	  if(post.board_subject.value == "") {
+    	    alert("제목을 입력해 주세요.");
+    	    post.board_subject.focus();
+    	    return false;
+    	  }
+    	  else if(post.board_content.value == "") {
+    	    alert("내용을 입력해 주세요.");
+    	    post.board_content.focus();
+    	    return false;
+    	  }
+    	  else return true;
+    	}
+    </script>
 </head>
 <body style="background: white;">
 	<jsp:include page="side.jsp" flush="false"/>
@@ -24,7 +39,7 @@
     <b><font size="6" color="gray">글쓰기</font></b>
     <br>
     
-    <form action="postCreate.do" method="POST">
+    <form name="post" action="postCreate.do" method="POST" onsubmit="return check()">
     	<input type="hidden" name="board_id" value='<%=session.getAttribute("userid")%>'>
     	<table width="100%" border="0" bordercolor="lightgray" align="center">
         	<tr>
@@ -43,7 +58,6 @@
             	<td id="title">파일첨부</td>
 	            <td><input type="file" name="board_file" /></td>    
         	</tr>
- 
 	        <tr align="center" valign="middle">
     	        <td colspan="5">
         	        <input type="reset" value="리셋" >

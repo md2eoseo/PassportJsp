@@ -19,12 +19,6 @@ public void execute(HttpServletRequest req, HttpServletResponse resp) throws Ser
 		String board_content = req.getParameter("board_content");
 		
 		int status = -1;
-
-		// error
-		if(board_id.isEmpty() || board_subject.isEmpty() || board_content.isEmpty()) {
-			req.setAttribute("error", "내용을 입력해주세요!");
-			HttpUtil.forward(req, resp, "/post.jsp");
-		}
 		
 		PostVO post = new PostVO();
 		post.setBoard_id(board_id);
@@ -35,7 +29,7 @@ public void execute(HttpServletRequest req, HttpServletResponse resp) throws Ser
 		status = service.postCreate(post);
 		
 		if(status == 1) {
-			req.setAttribute("info", board_id + "님 글 작성했습니다!");
+			req.setAttribute("info", board_id + "님이 글을 작성했습니다!");
 			HttpUtil.forward(req, resp, "/posts.jsp");
 		} else if(status == -1) {
 			req.setAttribute("error", "글쓰기 실패!");
