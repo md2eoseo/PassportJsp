@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%-- <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> --%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,6 +9,7 @@
         #wrap {
             width: 800px;
             margin: 0 auto 0 auto;
+            font: 12px '돋움';
         }
         #topForm{
             text-align :right;
@@ -31,47 +32,64 @@
 
 	<jsp:include page="side.jsp" flush="false"/>
 	
-    <section>
+<!--     <section>
 			
             <article class="article_block">#3</article>
             <article class="article_block">#4</article>
 
-    </section>
+    </section> -->
 <div id="wrap">
     <br>
+    <div class="error_block">${ error }</div>
+	<div class="info_block">${ info }</div>
     <div id="topForm">
-        <% 
-			if(session.getAttribute("userid") != null){
+        <%  if(session.getAttribute("userid") != null){
             	out.println("<input type='button' value='글쓰기' onclick='writeForm()'>");
-            }
-        %>
+            } %>
     </div>
     <br>
     <div id="board">
-        <table id="bList" width="800" border="3" bordercolor="lightgray">
-            <tr heigh="30">
+        <table id="bList" width="800" border="2" bordercolor="black">
+            <tr height="30">
                 <td>글번호</td>
                 <td>제목</td>
                 <td>작성자</td>
                 <td>작성일</td>
                 <td>조회수</td>
-            </tr>    
-            <tr>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
             </tr>
+            <c:forEach var="post" items="${requestScope.list}">
+            	<tr>
+                	<td>${post.board_num}</td>
+                	<td><a href="postList.do?num=${post.board_num}&pageNum=${pageNum}">${post.board_subject}</a></td>
+                	<td><a href="#">${post.board_id}</a></td>
+	                <td>${post.board_date}</td>
+    	            <td>${post.board_count}</td>
+        	    </tr>
+            </c:forEach>
         </table>
     </div>
     <br>
     <div id="pageForm">
-        페이지 번호
+        <c:if test="${startPage > 1}">
+            <a href='postList.do?page=${startPage-1}'>[이전]</a>
+        </c:if>
+        
+        <c:forEach var="pageNum" begin="${startPage}" end="${endPage}">
+            <c:if test="${pageNum == spage}">
+                ${pageNum}&nbsp;
+            </c:if>
+            <c:if test="${pageNum != spage}">
+                <a href='postList.do?page=${pageNum}'>${pageNum}</a>&nbsp;
+            </c:if>
+        </c:forEach>
+        
+        <c:if test="${endPage != maxPage}">
+            <a href='postList.do?page=${endPage+1}'>[다음]</a>
+        </c:if>
     </div>
     <br>
     <div id="searchForm">
-        <form>
+        <form action="postList.do" method="GET">
             <select name="opt">
                 <option value="0">제목</option>
                 <option value="1">내용</option>
@@ -83,7 +101,5 @@
         </form>    
     </div>
 </div>    
-<div class="error_block">${ error }</div>
-<div class="info_block">${ info }</div>
 </body>
 </html>
