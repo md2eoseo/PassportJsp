@@ -31,8 +31,8 @@ public class PostListController implements Controller{
         ArrayList<PostVO> list =  dbcp.postList(listOpt);
         int listCount = dbcp.getPostListCount(listOpt);
         
-        // 한 화면에 10개의 게시글을 보여지게함
-        // 페이지 번호는 총 5개, 이후로는 [다음]으로 표시
+        // 한 페이지 5개 포스트
+        // [이전] 페이지 5개 [다음]
         int maxPage = (int)(listCount/10.0 + 0.9);
 
         int startPage = (int)(spage/5.0 + 0.8) * 5 - 4;
@@ -49,6 +49,7 @@ public class PostListController implements Controller{
         req.setAttribute("list", list);
 
         HttpUtil.forward(req, resp, "/posts.jsp");
+        
 
     }
 }

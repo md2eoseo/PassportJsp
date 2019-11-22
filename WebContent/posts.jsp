@@ -57,6 +57,11 @@
                 <td>작성일</td>
                 <td>조회수</td>
             </tr>
+            <c:if test="${maxPage == 0}">
+            	<tr>
+                	<td colspan="5">검색된 글이 없습니다...</td>
+        	    </tr>
+            </c:if>
             <c:forEach var="post" items="${requestScope.list}">
             	<tr>
                 	<td>${post.board_num}</td>
