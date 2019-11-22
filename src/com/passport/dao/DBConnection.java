@@ -264,7 +264,7 @@ public class DBConnection
                 sql.append(", BOARD_CONTENT, BOARD_FILE, BOARD_COUNT, BOARD_GROUP");
                 sql.append(", BOARD_RE_LEV, BOARD_RE_SEQ, BOARD_DATE ");
                 sql.append("FROM");
-                sql.append(" (select * from POST order by BOARD_DATE desc, BOARD_RE_SEQ asc)) ");
+                sql.append(" (select * from POST order by BOARD_DATE desc, BOARD_NUM desc)) ");
                 sql.append("where rnum>=? and rnum<=?");
                 
                 pstmt = conn.prepareStatement(sql.toString());
@@ -281,7 +281,7 @@ public class DBConnection
                 sql.append(", BOARD_GROUP, BOARD_RE_LEV, BOARD_RE_SEQ ");
                 sql.append("FROM ");
                 sql.append("(select * from POST where BOARD_SUBJECT like ? ");
-                sql.append("order BY BOARD_GROUP desc, BOARD_RE_SEQ asc)) ");
+                sql.append("order BY BOARD_DATE desc, BOARD_NUM desc)) ");
                 sql.append("where rnum>=? and rnum<=?");
                 
                 pstmt = conn.prepareStatement(sql.toString());
@@ -299,7 +299,7 @@ public class DBConnection
                 sql.append(", BOARD_GROUP, BOARD_RE_LEV, BOARD_RE_SEQ ");
                 sql.append("FROM ");
                 sql.append("(select * from POST where BOARD_CONTENT like ? ");
-                sql.append("order BY BOARD_GROUP desc, BOARD_RE_SEQ asc)) ");
+                sql.append("order BY BOARD_DATE desc, BOARD_NUM desc)) ");
                 sql.append("where rnum>=? and rnum<=?");
                 
                 pstmt = conn.prepareStatement(sql.toString());
@@ -317,7 +317,7 @@ public class DBConnection
                 sql.append(", BOARD_GROUP, BOARD_RE_LEV, BOARD_RE_SEQ ");
                 sql.append("FROM ");
                 sql.append("(select * from POST where BOARD_SUBJECT like ? OR BOARD_CONTENT like ? ");
-                sql.append("order BY BOARD_GROUP desc, BOARD_RE_SEQ asc)) ");
+                sql.append("order BY BOARD_DATE desc, BOARD_NUM desc)) ");
                 sql.append("where rnum>=? and rnum<=?");
                 
                 pstmt = conn.prepareStatement(sql.toString());
@@ -336,7 +336,7 @@ public class DBConnection
                 sql.append(", BOARD_GROUP, BOARD_RE_LEV, BOARD_RE_SEQ ");
                 sql.append("FROM ");
                 sql.append("(select * from POST where BOARD_ID like ? ");
-                sql.append("order BY BOARD_GROUP desc, BOARD_RE_SEQ asc)) ");
+                sql.append("order BY BOARD_DATE desc, BOARD_NUM desc)) ");
                 sql.append("where rnum>=? and rnum<=?");
                 
                 pstmt = conn.prepareStatement(sql.toString());

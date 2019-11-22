@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.passport.dao.DBConnection;
-import com.passport.service.PostService;
 import com.passport.vo.PostVO;
 
 public class PostListController implements Controller{
