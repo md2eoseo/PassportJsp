@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,15 +25,14 @@
         <!-- sign in & up -->
         <div class="user_info">
             <div class="user_do">
-                <% 
-                	if(session.getAttribute("userid") == null){
-                		out.println("<div><a href='/Passport/memberLogin.jsp' class='link'><i class='fa fa-sign-in'></i> 로그인</a></div>"
-                				+ "<div><a href='/Passport/memberInsert.jsp' class='link'>/회원 가입</a></div>");
-                	} else {
-                		out.println("<div><a href='/Passport/memberLogout.do' class='link'><i class='fa fa-sign-out'></i> 로그아웃</a></div>"
-                				+ "<div><a href='/Passport/post.jsp' class='link'><i class='fa fa-book'></i> 글쓰기</a></div>");
-                	} 
-                %>
+            	<c:if test="${ sessionScope.userid == null }">
+            		<div><a href='/Passport/memberLogin.jsp' class='link'><i class='fa fa-sign-in'></i> 로그인</a></div>
+            		<div><a href='/Passport/memberInsert.jsp' class='link'>/회원 가입</a></div>
+            	</c:if>
+            	<c:if test="${ sessionScope.userid != null }">
+            		<div><a href='/Passport/memberLogout.do' class='link'><i class='fa fa-sign-out'></i> 로그아웃</a></div>
+            		<div><a href='/Passport/post.jsp' class='link'><i class='fa fa-book'></i> 글쓰기</a></div>
+            	</c:if>
             </div>
             <div class="signinuser_info">
 
