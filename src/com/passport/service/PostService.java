@@ -21,6 +21,10 @@ public class PostService {
 		return dbcp.postRead(board_num);
 	}
 	
+	public PostVO postMyRead(int board_num) {
+		return dbcp.postMyRead(board_num);
+	}
+	
 	public boolean updateCount(int board_num) {
 		return dbcp.updateCount(board_num);
 	}

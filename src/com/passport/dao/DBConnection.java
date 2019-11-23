@@ -642,6 +642,39 @@ public class DBConnection
         return result;
 	}
     
+    public PostVO postMyRead(int board_num) {
+    	PostVO post = null;
+        
+        try {
+            conn = DBConnection.getConnection();
+            
+            StringBuffer sql = new StringBuffer();
+            sql.append("select * from POST where BOARD_NUM = ?");
+            
+            pstmt = conn.prepareStatement(sql.toString());
+            pstmt.setInt(1, board_num);
+            
+            rs = pstmt.executeQuery();
+            if(rs.next()) {
+            	post = new PostVO();
+            	post.setBoard_num(board_num);
+            	post.setBoard_id(rs.getString("BOARD_ID"));
+            	post.setBoard_subject(rs.getString("BOARD_SUBJECT"));
+            	post.setBoard_content(rs.getString("BOARD_CONTENT"));
+            	post.setBoard_file(rs.getString("BOARD_FILE"));
+            	post.setBoard_count(rs.getInt("BOARD_COUNT"));
+            	post.setBoard_group(rs.getString("BOARD_GROUP"));
+            	post.setBoard_re_lev(rs.getInt("BOARD_RE_LEV"));
+            	post.setBoard_re_seq(rs.getInt("BOARD_RE_SEQ"));
+            	post.setBoard_date(rs.getDate("BOARD_DATE"));
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e.getMessage());
+        }
+        close();
+        return post;
+	}
+    
     private void close(){
         try {
         	if ( rs != null ){ rs.close(); rs=null;    }

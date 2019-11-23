@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title> postRead </title>
+	<title> postMyRead </title>
     <style type="text/css">
         #wrap {
             width: 800px;
@@ -58,8 +58,10 @@
 				</tr>
 				<tr align="center" valign="middle">
 					<td colspan="5">
+						<input type="button" value="수정">
+						<input type="button" value="삭제">
 						<input type="button" value="댓글">
-						<input type="button" value="목록" onclick="javascript:location.href='postList.do?page=${pageNum}'">
+						<input type="button" value="목록" onclick="javascript:location.href='postMyList.do?page=${pageNum}'">
 					</td>
 				</tr>
 			</table>
