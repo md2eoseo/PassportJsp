@@ -29,9 +29,9 @@
 		<div class="error_block">${ error }</div>
 		<div class="info_block">${ info }</div>
 		<div id="topForm">
-			<%  if(session.getAttribute("userid") != null){
-            	out.println("<input type='button' value='글쓰기' onclick='writeForm()'>");
-            } %>
+			<c:if test="${ sessionScope.userid != null }">
+				<input type='button' value='글쓰기' onclick='writeForm()'>
+			</c:if>
 		</div>
 		<br>
 		<div id="board">

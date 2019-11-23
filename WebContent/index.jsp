@@ -44,7 +44,7 @@
 
 				</article>
 			</c:if>
-			 <c:if test="${ sessionScope.userid != null }">
+			<c:if test="${ sessionScope.userid != null }">
 				<article class="member_block">
 
 					<div class="welcome_block">어서오세요.<br><span style="font-size:18px;">패스포트에서 여행의 추억을 기록하세요.</span></div>
