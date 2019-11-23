@@ -40,11 +40,11 @@
     <br>
     
     <form name="post" action="postCreate.do" method="POST" onsubmit="return check()">
-    	<input type="hidden" name="board_id" value='<%=session.getAttribute("userid")%>'>
+    	<input type="hidden" name="board_id" value="${ sessionScope.userid }">
     	<table width="100%" border="0" bordercolor="lightgray" align="center">
         	<tr>
         	    <td id="title">글쓴이</td>
-	            <td><%=session.getAttribute("userid")%></td>
+	            <td>${ sessionScope.userid }</td>
     	    </tr>
         	    <tr>
             	<td id="title">제 목</td>

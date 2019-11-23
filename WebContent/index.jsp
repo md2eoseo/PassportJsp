@@ -1,5 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@	page import="java.util.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
@@ -10,13 +9,13 @@
 
     <section>
         <div class="">
-
-            <article class="article_block article_top">#1</article>
-            <article class="article_block article_top">#2</article>
+        
+        	<c:forEach var="post" items="${requestScope.list}" begin="0" end="1">
+        		<a href="postRead.do?num=${post.board_num}"><article class="article_block article_top">${post.board_subject}</article></a>
+			</c:forEach>
             
             <c:if test="${ sessionScope.userid == null }">
 				<article class="member_block">
-
 					<div class="welcome_block">어서오세요.<br><span style="font-size:18px;">패스포트에서 여행의 추억을 기록하세요.</span></div>
 					<div class="error_block">${ error }</div>
 					<div class="info_block">${ info }</div>
@@ -41,21 +40,19 @@
 							<input type="submit" value="회원가입" class="submit_btn">
 						</form>
 					</div>
-
 				</article>
 			</c:if>
 			<c:if test="${ sessionScope.userid != null }">
 				<article class="member_block">
-
 					<div class="welcome_block">어서오세요.<br><span style="font-size:18px;">패스포트에서 여행의 추억을 기록하세요.</span></div>
 					<div class="error_block">${ error }</div>
 					<div class="info_block">${ info }</div>
-
 				</article>
 			</c:if>
 			
-            <article class="article_block">#3</article>
-            <article class="article_block">#4</article>
+			<c:forEach var="post" items="${requestScope.list}" begin="2" end="3">
+        		<a href="postRead.do?num=${post.board_num}"><article class="article_block">${post.board_subject}</article></a>
+			</c:forEach>
 
         </div>
     </section>

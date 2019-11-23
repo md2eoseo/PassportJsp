@@ -675,6 +675,49 @@ public class DBConnection
         return post;
 	}
     
+    public ArrayList<PostVO> postIndex(){
+        ArrayList<PostVO> list = new ArrayList<PostVO>();
+        
+        try {
+            conn = DBConnection.getConnection();
+            StringBuffer sql = new StringBuffer();
+            
+            sql.append("select * from ");
+            sql.append("(select rownum rnum, BOARD_NUM, BOARD_ID, BOARD_SUBJECT");
+            sql.append(", BOARD_CONTENT, BOARD_FILE, BOARD_COUNT, BOARD_GROUP");
+			sql.append(", BOARD_RE_LEV, BOARD_RE_SEQ, BOARD_DATE ");
+			sql.append("FROM");
+			sql.append(" (select * from POST order by BOARD_DATE desc, BOARD_NUM desc)) ");
+			sql.append("where rnum<=4");
+
+			pstmt = conn.prepareStatement(sql.toString());
+
+			sql.delete(0, sql.toString().length());
+
+			rs = pstmt.executeQuery();
+            while(rs.next())
+            {
+                PostVO post = new PostVO();
+                post.setBoard_num(rs.getInt("BOARD_NUM"));
+                post.setBoard_id(rs.getString("BOARD_ID"));
+                post.setBoard_subject(rs.getString("BOARD_SUBJECT"));
+                post.setBoard_content(rs.getString("BOARD_CONTENT"));
+                post.setBoard_file(rs.getString("BOARD_FILE"));
+                post.setBoard_count(rs.getInt("BOARD_COUNT"));
+                post.setBoard_group(rs.getString("BOARD_GROUP"));
+                post.setBoard_re_lev(rs.getInt("BOARD_RE_LEV"));
+                post.setBoard_re_seq(rs.getInt("BOARD_RE_SEQ"));
+                post.setBoard_date(rs.getDate("BOARD_DATE"));
+                list.add(post);
+            }
+            
+        } catch (Exception e) {
+            throw new RuntimeException(e.getMessage());
+        }
+        close();
+        return list;
+    } 
+    
     private void close(){
         try {
         	if ( rs != null ){ rs.close(); rs=null;    }

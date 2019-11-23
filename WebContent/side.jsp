@@ -19,7 +19,7 @@
 	<header>
         <!-- logo -->
         <h1>
-            <div id="logo"><a href="/Passport/index.jsp"><i class="fa fa-book"></i> Passport</a></div>
+            <div id="logo"><a href="/Passport/index.do"><i class="fa fa-book"></i> Passport</a></div>
         </h1>
 
         <!-- sign in & up -->
@@ -60,7 +60,7 @@
 
         <!-- sns -->
         <div class="sns_group">
-            <a href="/Passport/index.jsp" class="link"><i class="nav-icon fa fa-home"></i></a>
+            <a href="/Passport/index.do" class="link"><i class="nav-icon fa fa-home"></i></a>
             <a href="#" class="link"><i class="nav-icon fa fa-facebook"></i></a>
             <a href="#" class="link"><i class="nav-icon fa fa-instagram"></i></a>
         </div>
