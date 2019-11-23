@@ -17,6 +17,7 @@ public void execute(HttpServletRequest req, HttpServletResponse resp) throws Ser
 		String board_id = req.getParameter("board_id");
 		String board_subject = req.getParameter("board_subject");
 		String board_content = req.getParameter("board_content");
+		String board_file = req.getParameter("board_file");
 		
 		int status = -1;
 		
@@ -24,6 +25,7 @@ public void execute(HttpServletRequest req, HttpServletResponse resp) throws Ser
 		post.setBoard_id(board_id);
 		post.setBoard_subject(board_subject);
 		post.setBoard_content(board_content);
+		post.setBoard_file(board_file);
 		
 		PostService service = PostService.getInstance();
 		status = service.postCreate(post);

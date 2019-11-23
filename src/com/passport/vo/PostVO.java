@@ -4,16 +4,16 @@ import java.sql.Date;
 
 public class PostVO {
 	
-	private int board_num;          // 글번호
-    private String board_id;         // 글 작성자
-    private String board_subject;     // 글 제목
-    private String board_content;     // 글 내용
+	private int board_num;          // 번호
+    private String board_id;         // 작성자
+    private String board_subject;     // 제목
+    private String board_content;     // 내용
     private String board_file;         // 첨부파일 이름
-    private String board_group;         // 글 그룹이름
-    private int board_re_lev;         // 답변글 깊이
-    private int board_re_seq;         // 답변글 순서
-    private int board_count;         // 글 조회수
-    private Date board_date;         // 글 작성일
+    private String board_group;         // 그룹
+    private int board_re_lev;         // 댓글 깊이
+    private int board_re_seq;         // 댓글 순서
+    private int board_count;         // 조회수
+    private Date board_date;         // 작성일
     
     public int getBoard_num() {
         return board_num;

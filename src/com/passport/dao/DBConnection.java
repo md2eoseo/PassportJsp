@@ -205,6 +205,7 @@ public class DBConnection
 	public int postCreate(PostVO post) {
 		try {
 			conn = getConnection();
+			System.out.println(getSeq() + " " + post.getBoard_subject());
 			pstmt = conn.prepareStatement("insert into POST values(?,?,?,?,?,?,?,?,?,sysdate)");
 			pstmt.setInt(1, getSeq());
 			pstmt.setString(2, post.getBoard_id());
