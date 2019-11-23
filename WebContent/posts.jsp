@@ -30,7 +30,7 @@
 		<div class="info_block">${ info }</div>
 		<div id="topForm">
 			<c:if test="${ sessionScope.userid != null }">
-				<input type='button' value='글쓰기' onclick='writeForm()'>
+				<input type='button' value='글쓰기' onclick='javascript:location.href="post.jsp"'>
 			</c:if>
 		</div>
 		<br>

@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
@@ -29,9 +28,9 @@
 		<div class="error_block">${ error }</div>
 		<div class="info_block">${ info }</div>
 		<div id="topForm">
-			<%  if(session.getAttribute("userid") != null){
-            	out.println("<input type='button' value='글쓰기' onclick='writeForm()'>");
-            } %>
+			<c:if test="${ sessionScope.userid != null }">
+				<input type='button' value='글쓰기' onclick='javascript:location.href="post.jsp"'>
+			</c:if>
 		</div>
 		<br>
 		<div id="board">
