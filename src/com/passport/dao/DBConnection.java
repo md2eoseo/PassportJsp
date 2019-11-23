@@ -18,6 +18,9 @@ import com.passport.vo.PostVO;
  
 public class DBConnection 
 {
+	Connection conn = null;
+	PreparedStatement pstmt = null;
+	ResultSet rs = null;
     private static DBConnection dbcp = new DBConnection();
 	private DBConnection() { }
 	public static DBConnection getInstance() {
@@ -25,24 +28,19 @@ public class DBConnection
 	}
 	
 	public static Connection getConnection() throws SQLException, NamingException, ClassNotFoundException {
-        /*Context initCtx = new InitialContext();
-        
-        // initCtx의 lookup메서드를 이용해서 "java:comp/env" 에 해당하는 객체를 찾아서 evnCtx에 삽입
-        Context envCtx = (Context) initCtx.lookup("java:comp/env");
-        
-        
-        // envCtx의 lookup메서드를 이용해서 "jdbc/orcl"에 해당하는 객체를 찾아서 ds에 삽입
-        DataSource ds = (DataSource) envCtx.lookup("jdbc/orcl");
-        
-        // getConnection메서드를 이용해서 커넥션 풀로 부터 커넥션 객체를 얻어내어 conn변수에 저장
-        Connection conn = ds.getConnection();
-        return conn;*/
+//        Context initCtx = new InitialContext();
+//        // initCtx의 lookup메서드를 이용해서 "java:comp/env" 에 해당하는 객체를 찾아서 evnCtx에 삽입
+//        Context envCtx = (Context) initCtx.lookup("java:comp/env");
+//        // envCtx의 lookup메서드를 이용해서 "jdbc/orcl"에 해당하는 객체를 찾아서 ds에 삽입
+//        DataSource ds = (DataSource) envCtx.lookup("jdbc/orcl");
+//        // getConnection메서드를 이용해서 커넥션 풀로 부터 커넥션 객체를 얻어내어 conn변수에 저장
+//        Connection conn = ds.getConnection();
+//        return conn;
         
         Context context = new InitialContext();
         DataSource dataSource = (DataSource) context.lookup("java:comp/env/jdbc/xe");
         Connection conn = dataSource.getConnection();
         return conn;
-        
 	}
 	
 //	public Connection connect() {
@@ -85,8 +83,6 @@ public class DBConnection
 //	}
 	
 	public void memberInsert(MemberVO member) {
-		Connection conn = null;
-		PreparedStatement pstmt = null;
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement("insert into member values(?,?,?,?)");
@@ -94,17 +90,14 @@ public class DBConnection
 			pstmt.setString(2, member.getPassword());
 			pstmt.setString(3, member.getName());
 			pstmt.setString(4, member.getMail());
-			pstmt.executeUpdate();			
+			pstmt.executeUpdate();	
+			close();
 		} catch (Exception ex) {
 			System.out.println("Error : " + ex);
 		}
 	}
 	
 	public MemberVO memberSearch(String id) {
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		
 		MemberVO member = null;
 		
 		try {
@@ -119,6 +112,7 @@ public class DBConnection
 				member.setName(rs.getString(3));
 				member.setMail(rs.getString(4));
 			}
+			close();
 		} catch (Exception ex) {
 			System.out.println("Error : " + ex);
 		}
@@ -127,8 +121,6 @@ public class DBConnection
 	}
 	
 	public void memberUpdate(MemberVO member) {
-		Connection conn = null;
-		PreparedStatement pstmt = null;
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement("update member set password=?, name=?, mail=? where id=?");
@@ -136,31 +128,26 @@ public class DBConnection
 			pstmt.setString(2, member.getName());
 			pstmt.setString(3, member.getMail());
 			pstmt.setString(4, member.getId());
-			pstmt.executeUpdate();			
+			pstmt.executeUpdate();
+			close();
 		} catch (Exception ex) {
 			System.out.println("Error : " + ex);
 		}
 	}
 	
 	public void memberDelete(String id) {
-		Connection conn = null;
-		PreparedStatement pstmt = null;
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement("delete from member where id=?");
 			pstmt.setString(1, id);
-			pstmt.executeUpdate();			
-
+			pstmt.executeUpdate();
+			close();
 		} catch (Exception ex) {
 			System.out.println("Error : " + ex);
 		}
 	}
 	
 	public int memberLogin(String id, String password) {
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		
 		String dbPW;
 		int x = -1;
 		
@@ -186,16 +173,13 @@ public class DBConnection
 		} catch (Exception ex) {
 			System.out.println("Error : " + ex);
 		}
-		
+		close();
 		return x;
 	}
 	
 	// post service
 	public int getSeq(){
         int result = 1;
-        Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs;
         
         try {
             conn = DBConnection.getConnection();
@@ -214,14 +198,11 @@ public class DBConnection
         } catch (Exception e) {
             throw new RuntimeException(e.getMessage());
         }
-        
+        close();
         return result;    
     }
 	
 	public int postCreate(PostVO post) {
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement("insert into post values(?,?,?,?,?,?,?,?,?,sysdate)");
@@ -235,9 +216,11 @@ public class DBConnection
             pstmt.setInt(8, 0);
             pstmt.setInt(9, 0);
 			pstmt.executeUpdate();
+			close();
 			return 1;
 		} catch (Exception ex) {
 			System.out.println("Error : " + ex);
+			close();
 			return -1;
 		}
 	}
@@ -248,10 +231,6 @@ public class DBConnection
         String opt = (String)listOpt.get("opt");
         String condition = (String)listOpt.get("condition");
         int start = (Integer)listOpt.get("start");
-        
-        Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
         
         try {
             conn = DBConnection.getConnection();
@@ -367,7 +346,7 @@ public class DBConnection
         } catch (Exception e) {
             throw new RuntimeException(e.getMessage());
         }
-
+        close();
         return list;
     } 
 	
@@ -375,11 +354,7 @@ public class DBConnection
         int result = 0;
         String opt = (String)listOpt.get("opt");
         String condition = (String)listOpt.get("condition");
-        
-        Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-        
+
         try {
             conn = DBConnection.getConnection();
             StringBuffer sql = new StringBuffer();
@@ -432,7 +407,80 @@ public class DBConnection
         } catch (Exception e) {
             throw new RuntimeException(e.getMessage());
         }
-
+        close();
         return result;
+    }
+    
+    public PostVO postRead(int board_num) {
+    	PostVO post = null;
+        
+        try {
+            conn = DBConnection.getConnection();
+            
+            StringBuffer sql = new StringBuffer();
+            sql.append("select * from POST where BOARD_NUM = ?");
+            
+            pstmt = conn.prepareStatement(sql.toString());
+            pstmt.setInt(1, board_num);
+            
+            rs = pstmt.executeQuery();
+            if(rs.next()) {
+            	post = new PostVO();
+            	post.setBoard_num(board_num);
+            	post.setBoard_id(rs.getString("BOARD_ID"));
+            	post.setBoard_subject(rs.getString("BOARD_SUBJECT"));
+            	post.setBoard_content(rs.getString("BOARD_CONTENT"));
+            	post.setBoard_file(rs.getString("BOARD_FILE"));
+            	post.setBoard_count(rs.getInt("BOARD_COUNT"));
+            	post.setBoard_group(rs.getString("BOARD_GROUP"));
+            	post.setBoard_re_lev(rs.getInt("BOARD_RE_LEV"));
+            	post.setBoard_re_seq(rs.getInt("BOARD_RE_SEQ"));
+            	post.setBoard_date(rs.getDate("BOARD_DATE"));
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e.getMessage());
+        }
+        close();
+        return post;
+    }
+    
+    public boolean updateCount(int board_num) {
+        boolean result = false;
+        
+        try {
+            conn = DBConnection.getConnection();
+            
+            StringBuffer sql = new StringBuffer();
+            sql.append("update POST set BOARD_COUNT = BOARD_COUNT+1 ");
+            sql.append("where BOARD_NUM = ?");
+            
+            pstmt = conn.prepareStatement(sql.toString());
+            pstmt.setInt(1, board_num);
+            
+            int flag = pstmt.executeUpdate();
+            if(flag > 0){
+                result = true;
+                conn.commit();
+            }    
+        } catch (Exception e) {
+            try {
+                conn.rollback();
+            } catch (SQLException sqle) {
+                sqle.printStackTrace();
+            }
+            throw new RuntimeException(e.getMessage());
+        }
+        close();
+        return result;
+    }
+    
+    private void close(){
+        try {
+        	if ( rs != null ){ rs.close(); rs=null;    }
+            if ( pstmt != null ){ pstmt.close(); pstmt=null; }
+            if ( conn != null ){ conn.close(); conn=null;    }
+        } catch (Exception e) {
+            throw new RuntimeException(e.getMessage());
+        }
     }
 }

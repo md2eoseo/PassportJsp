@@ -19,11 +19,6 @@
             text-align: center;
         }
     </style>
-    <script type="text/javascript">
-        function writeForm(){
-            location.href="post.jsp";
-        }
-    </script>
 </head>
 <body>    
 
@@ -56,7 +51,7 @@
 				<c:forEach var="post" items="${requestScope.list}">
 					<tr>
 						<td>${post.board_num}</td>
-						<td><a href="postList.do?num=${post.board_num}&pageNum=${pageNum}">${post.board_subject}</a></td>
+						<td><a href="postRead.do?num=${post.board_num}&pageNum=${spage}">${post.board_subject}</a></td>
 						<td><a href="#">${post.board_id}</a></td>
 						<td>${post.board_date}</td>
 						<td>${post.board_count}</td>
