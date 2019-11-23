@@ -54,7 +54,7 @@
         <!-- menu -->
         <div class="menu_group">
             <a href="/Passport/postList.do" class="link"><i class="nav-icon fa fa-columns"></i> 전체 글</a>
-            <a href="#" class="link"><i class="nav-icon fa fa-list-ul"></i> 내 글</a>
+            <a href="/Passport/postMyList.do" class="link"><i class="nav-icon fa fa-list-ul"></i> 내 글</a>
             <a href="#" class="link"><i class="nav-icon fa fa-bandcamp"></i> 랜덤</a>
             <a href="#" class="link"><i class="nav-icon fa fa-info-circle"></i> 정보</a>
         </div>

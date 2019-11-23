@@ -329,18 +329,18 @@ public class DBConnection
             rs = pstmt.executeQuery();
             while(rs.next())
             {
-                PostVO board = new PostVO();
-                board.setBoard_num(rs.getInt("BOARD_NUM"));
-                board.setBoard_id(rs.getString("BOARD_ID"));
-                board.setBoard_subject(rs.getString("BOARD_SUBJECT"));
-                board.setBoard_content(rs.getString("BOARD_CONTENT"));
-                board.setBoard_file(rs.getString("BOARD_FILE"));
-                board.setBoard_count(rs.getInt("BOARD_COUNT"));
-                board.setBoard_group(rs.getString("BOARD_GROUP"));
-                board.setBoard_re_lev(rs.getInt("BOARD_RE_LEV"));
-                board.setBoard_re_seq(rs.getInt("BOARD_RE_SEQ"));
-                board.setBoard_date(rs.getDate("BOARD_DATE"));
-                list.add(board);
+                PostVO post = new PostVO();
+                post.setBoard_num(rs.getInt("BOARD_NUM"));
+                post.setBoard_id(rs.getString("BOARD_ID"));
+                post.setBoard_subject(rs.getString("BOARD_SUBJECT"));
+                post.setBoard_content(rs.getString("BOARD_CONTENT"));
+                post.setBoard_file(rs.getString("BOARD_FILE"));
+                post.setBoard_count(rs.getInt("BOARD_COUNT"));
+                post.setBoard_group(rs.getString("BOARD_GROUP"));
+                post.setBoard_re_lev(rs.getInt("BOARD_RE_LEV"));
+                post.setBoard_re_seq(rs.getInt("BOARD_RE_SEQ"));
+                post.setBoard_date(rs.getDate("BOARD_DATE"));
+                list.add(post);
             }
             
         } catch (Exception e) {
@@ -473,6 +473,174 @@ public class DBConnection
         close();
         return result;
     }
+    
+    public ArrayList<PostVO> postMyList(HashMap<String, Object> listOpt, String userid) {
+    	ArrayList<PostVO> list = new ArrayList<PostVO>();
+        
+        String opt = (String)listOpt.get("opt");
+        String condition = (String)listOpt.get("condition");
+        int start = (Integer)listOpt.get("start");
+        
+        try {
+            conn = DBConnection.getConnection();
+            StringBuffer sql = new StringBuffer();
+            
+            // 글 전체
+            if(opt == null){
+                sql.append("select * from ");
+                sql.append("(select rownum rnum, BOARD_NUM, BOARD_ID, BOARD_SUBJECT");
+                sql.append(", BOARD_CONTENT, BOARD_FILE, BOARD_COUNT, BOARD_GROUP");
+                sql.append(", BOARD_RE_LEV, BOARD_RE_SEQ, BOARD_DATE ");
+                sql.append("FROM");
+                sql.append(" (select * from POST where BOARD_ID=? order by BOARD_DATE desc, BOARD_NUM desc)) ");
+                sql.append("where rnum>=? and rnum<=?");
+                
+                pstmt = conn.prepareStatement(sql.toString());
+                pstmt.setString(1, userid);
+                pstmt.setInt(2, start);
+                pstmt.setInt(3, start+9);
+
+                sql.delete(0, sql.toString().length());
+            }
+            else if(opt.equals("0")) // 제목으로 검색
+            {
+                sql.append("select * from ");
+                sql.append("(select rownum rnum, BOARD_NUM, BOARD_ID, BOARD_SUBJECT");
+                sql.append(", BOARD_CONTENT, BOARD_FILE, BOARD_DATE, BOARD_COUNT");
+                sql.append(", BOARD_GROUP, BOARD_RE_LEV, BOARD_RE_SEQ ");
+                sql.append("FROM ");
+                sql.append("(select * from POST where BOARD_SUBJECT like ? and BOARD_ID=?");
+                sql.append("order BY BOARD_DATE desc, BOARD_NUM desc)) ");
+                sql.append("where rnum>=? and rnum<=?");
+                
+                pstmt = conn.prepareStatement(sql.toString());
+                pstmt.setString(1, "%"+condition+"%");
+                pstmt.setString(2, userid);
+                pstmt.setInt(3, start);
+                pstmt.setInt(4, start+9);
+                
+                sql.delete(0, sql.toString().length());
+            }
+            else if(opt.equals("1")) // 내용으로 검색
+            {
+                sql.append("select * from ");
+                sql.append("(select rownum rnum, BOARD_NUM, BOARD_ID, BOARD_SUBJECT");
+                sql.append(", BOARD_CONTENT, BOARD_FILE, BOARD_DATE, BOARD_COUNT");
+                sql.append(", BOARD_GROUP, BOARD_RE_LEV, BOARD_RE_SEQ ");
+                sql.append("FROM ");
+                sql.append("(select * from POST where BOARD_CONTENT like ? and BOARD_ID=?");
+                sql.append("order BY BOARD_DATE desc, BOARD_NUM desc)) ");
+                sql.append("where rnum>=? and rnum<=?");
+                
+                pstmt = conn.prepareStatement(sql.toString());
+                pstmt.setString(1, "%"+condition+"%");
+                pstmt.setString(2, userid);
+                pstmt.setInt(3, start);
+                pstmt.setInt(4, start+9);
+                
+                sql.delete(0, sql.toString().length());
+            }
+            else if(opt.equals("2")) // 제목+내용으로 검색
+            {
+                sql.append("select * from ");
+                sql.append("(select rownum rnum, BOARD_NUM, BOARD_ID, BOARD_SUBJECT");
+                sql.append(", BOARD_CONTENT, BOARD_FILE, BOARD_DATE, BOARD_COUNT");
+                sql.append(", BOARD_GROUP, BOARD_RE_LEV, BOARD_RE_SEQ ");
+                sql.append("FROM ");
+                sql.append("(select * from POST where BOARD_SUBJECT like ? OR BOARD_CONTENT like ? and BOARD_ID=?");
+                sql.append("order BY BOARD_DATE desc, BOARD_NUM desc)) ");
+                sql.append("where rnum>=? and rnum<=?");
+                
+                pstmt = conn.prepareStatement(sql.toString());
+                pstmt.setString(1, "%"+condition+"%");
+                pstmt.setString(2, "%"+condition+"%");
+                pstmt.setString(3, userid);
+                pstmt.setInt(4, start);
+                pstmt.setInt(5, start+9);
+                
+                sql.delete(0, sql.toString().length());
+            }
+            
+            rs = pstmt.executeQuery();
+            while(rs.next())
+            {
+                PostVO post = new PostVO();
+                post.setBoard_num(rs.getInt("BOARD_NUM"));
+                post.setBoard_id(rs.getString("BOARD_ID"));
+                post.setBoard_subject(rs.getString("BOARD_SUBJECT"));
+                post.setBoard_content(rs.getString("BOARD_CONTENT"));
+                post.setBoard_file(rs.getString("BOARD_FILE"));
+                post.setBoard_count(rs.getInt("BOARD_COUNT"));
+                post.setBoard_group(rs.getString("BOARD_GROUP"));
+                post.setBoard_re_lev(rs.getInt("BOARD_RE_LEV"));
+                post.setBoard_re_seq(rs.getInt("BOARD_RE_SEQ"));
+                post.setBoard_date(rs.getDate("BOARD_DATE"));
+                list.add(post);
+            }
+            
+        } catch (Exception e) {
+            throw new RuntimeException(e.getMessage());
+        }
+        close();
+        return list;
+	}
+    
+    public int getPostMyListCount(HashMap<String, Object> listOpt, String userid) {
+    	int result = 0;
+        String opt = (String)listOpt.get("opt");
+        String condition = (String)listOpt.get("condition");
+
+        try {
+            conn = DBConnection.getConnection();
+            StringBuffer sql = new StringBuffer();
+            
+            if(opt == null)    // 전체글의 개수
+            {
+                sql.append("select count(*) from POST where BOARD_ID=?");
+                pstmt = conn.prepareStatement(sql.toString());
+                pstmt.setString(1, userid);
+
+                sql.delete(0, sql.toString().length());
+            }
+            else if(opt.equals("0")) // 제목으로 검색한 글의 개수
+            {
+                sql.append("select count(*) from POST where BOARD_SUBJECT like ? and BOARD_ID=?");
+                pstmt = conn.prepareStatement(sql.toString());
+                pstmt.setString(1, '%'+condition+'%');
+                pstmt.setString(2, userid);
+                
+                sql.delete(0, sql.toString().length());
+            }
+            else if(opt.equals("1")) // 내용으로 검색한 글의 개수
+            {
+                sql.append("select count(*) from POST where BOARD_CONTENT like ? and BOARD_ID=?");
+                pstmt = conn.prepareStatement(sql.toString());
+                pstmt.setString(1, '%'+condition+'%');
+                pstmt.setString(2, userid);
+                
+                sql.delete(0, sql.toString().length());
+            }
+            else if(opt.equals("2")) // 제목+내용으로 검색한 글의 개수
+            {
+                sql.append("select count(*) from POST ");
+                sql.append("where BOARD_SUBJECT like ? or BOARD_CONTENT like ? and BOARD_ID=?");
+                pstmt = conn.prepareStatement(sql.toString());
+                pstmt.setString(1, '%'+condition+'%');
+                pstmt.setString(2, '%'+condition+'%');
+                pstmt.setString(3, userid);
+                
+                sql.delete(0, sql.toString().length());
+            }
+            
+            rs = pstmt.executeQuery();
+            if(rs.next())    result = rs.getInt(1);
+            
+        } catch (Exception e) {
+            throw new RuntimeException(e.getMessage());
+        }
+        close();
+        return result;
+	}
     
     private void close(){
         try {
