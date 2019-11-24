@@ -119,6 +119,22 @@ article.article_block {
     opacity: 0.8;
     transform: scale(1.0);
     transition: 0.5s;
+    color: #000000;
+    padding: 10px;
+}
+
+article span.article_subject {
+	font-size: 28px;
+	position: absolute;
+	left: 10px;
+	top: 10px;
+}
+
+article span.article_id {
+	font-size: 18px;
+	position: absolute;
+	right: 10px;
+	bottom: 10px;
 }
 
 article.article_block:hover {

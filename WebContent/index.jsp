@@ -14,7 +14,9 @@
         <div class="">
         
         	<c:forEach var="post" items="${requestScope.list}" begin="0" end="1">
-        		<a href="postRead.do?num=${post.board_num}"><article class="article_block article_top">${post.board_subject}</article></a>
+        		<a href="postRead.do?num=${post.board_num}"><article class="article_block article_top">
+        		<span class="article_subject">${post.board_subject}</span><br>
+        		<span class="article_id">${post.board_id}, ${post.board_date}</span></article></a>
 			</c:forEach>
             
             <c:if test="${ sessionScope.userid == null }">
@@ -54,7 +56,9 @@
 			</c:if>
 			
 			<c:forEach var="post" items="${requestScope.list}" begin="2" end="3">
-        		<a href="postRead.do?num=${post.board_num}"><article class="article_block">${post.board_subject}</article></a>
+        		<a href="postRead.do?num=${post.board_num}"><article class="article_block">
+        		<span class="article_subject">${post.board_subject}</span><br>
+        		<span class="article_id">${post.board_id}, ${post.board_date}</span></article></a>
 			</c:forEach>
 
         </div>
