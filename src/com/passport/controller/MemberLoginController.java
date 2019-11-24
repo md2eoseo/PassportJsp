@@ -8,7 +8,6 @@ import com.passport.service.MemberService;
 
 public class MemberLoginController implements Controller {
 	public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException ,IOException {
-		
 		String id = req.getParameter("id");
 		String password = req.getParameter("password");
 		int status = -1;
@@ -16,7 +15,7 @@ public class MemberLoginController implements Controller {
 		// error
 		if(id.isEmpty() || password.isEmpty()) {
 			req.setAttribute("error", "입력하지 않은 정보가 있습니다!");
-			HttpUtil.forward(req, resp, "/index.jsp");
+			HttpUtil.forward(req, resp, "/index.do");
 			return;
 		}
 
@@ -38,6 +37,6 @@ public class MemberLoginController implements Controller {
 			req.setAttribute("error", "존재하지 않는 아이디입니다!");
 		}
 		
-		HttpUtil.forward(req, resp, "/index.jsp");
+		HttpUtil.forward(req, resp, "/index.do");
 	};
 }

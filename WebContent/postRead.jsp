@@ -54,7 +54,7 @@
 				</tr>
 				<tr>
 					<td id="title">첨부파일</td>
-					<td><a href='FileDownloadAction.bo?file_name=${post.board_file}'>${post.board_file}</a></td>
+					<td><a href='FileDownload.do?file_name=${post.board_file}'>${post.board_file}</a></td>
 				</tr>
 				<tr align="center" valign="middle">
 					<td colspan="5">
