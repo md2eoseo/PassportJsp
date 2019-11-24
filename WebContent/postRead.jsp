@@ -59,7 +59,12 @@
 				<tr align="center" valign="middle">
 					<td colspan="5">
 						<input type="button" value="댓글">
-						<input type="button" value="목록" onclick="javascript:location.href='postList.do?page=${pageNum}'">
+						<c:if test="${ pageNum != null }">
+							<input type="button" value="목록" onclick="javascript:location.href='postList.do?page=${pageNum}'">
+						</c:if>
+						<c:if test="${ pageNum == null }">
+							<input type="button" value="목록" onclick="javascript:location.href='index.do'">
+						</c:if>
 					</td>
 				</tr>
 			</table>
