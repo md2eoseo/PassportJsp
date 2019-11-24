@@ -45,13 +45,13 @@
 <section>
 	<br>
     <b><font size="6">글쓰기</font></b>
-    <br>
+    <br><br><br>
     
     <form name="post" action="postCreate.do" method="POST" onsubmit="return check()">
     	<input type="hidden" name="board_id" value="${ sessionScope.userid }">
-    	<table width="100%" border="0" bordercolor="lightgray" align="center">
+    	<table width="100%" border="1" bordercolor="lightgray" align="center" style="font: 15px '굴림';">
         	<tr>
-        	    <td id="title">글쓴이</td>
+        	    <td id="title" width="10%">글쓴이</td>
 	            <td>${ sessionScope.userid }</td>
     	    </tr>
         	    <tr>
@@ -60,7 +60,7 @@
 	        </tr>
     	    <tr>
         	    <td id="title">내 용</td>
-	            <td><textarea name="board_content" cols="72" rows="20"></textarea></td>        
+	            <td><textarea name="board_content" cols="150" rows="30"></textarea></td>        
         	</tr>
         	<tr>
             	<td id="title">파일첨부</td>
