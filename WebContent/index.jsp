@@ -2,7 +2,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
-<head><title> Passport </title></head>
+<head>
+	<link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
+	<title> Passport </title>
+</head>
 <body>
 
 	<jsp:include page="side.jsp" flush="false"/>
@@ -16,7 +19,7 @@
             
             <c:if test="${ sessionScope.userid == null }">
 				<article class="member_block">
-					<div class="welcome_block">어서오세요.<br><span style="font-size:18px;">패스포트에서 여행의 추억을 기록하세요.</span></div>
+					<div class="welcome_block">어서오세요.<br><span style="font-size:18px;">패스포트에서 추억을 기록하세요.</span></div>
 					<div class="error_block">${ error }</div>
 					<div class="info_block">${ info }</div>
 
@@ -44,7 +47,7 @@
 			</c:if>
 			<c:if test="${ sessionScope.userid != null }">
 				<article class="member_block">
-					<div class="welcome_block">어서오세요.<br><span style="font-size:18px;">패스포트에서 여행의 추억을 기록하세요.</span></div>
+					<div class="welcome_block">어서오세요.<br><span style="font-size:18px;">패스포트에서 추억을 기록하세요.</span></div>
 					<div class="error_block">${ error }</div>
 					<div class="info_block">${ info }</div>
 				</article>

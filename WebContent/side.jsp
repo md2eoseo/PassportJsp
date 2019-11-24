@@ -10,8 +10,9 @@
     <!-- 모바일기기의 물리적 화면 해상도를 웹페이지가 인식할 수 있게 해준다 -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/main_style.css?a">
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/main_style.css?a" />
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
     <style>
     	@import url('https://fonts.googleapis.com/css?family=Poiret+One&display=swap');
 	</style>
@@ -52,7 +53,12 @@
         <!-- menu -->
         <div class="menu_group">
             <a href="/Passport/postList.do" class="link"><i class="nav-icon fa fa-columns"></i> 전체 글</a>
-            <a href="/Passport/postMyList.do" class="link"><i class="nav-icon fa fa-list-ul"></i> 내 글</a>
+            <c:if test="${ sessionScope.userid == null }">
+            	<a onclick="alert('로그인된 사용자가 없습니다!');return false;" class="link"><i class="nav-icon fa fa-list-ul"></i> 내 글</a>
+            </c:if>
+            <c:if test="${ sessionScope.userid != null }">
+            	<a href="/Passport/postMyList.do" class="link"><i class="nav-icon fa fa-list-ul"></i> 내 글</a>
+            </c:if>
             <a href="#" class="link"><i class="nav-icon fa fa-bandcamp"></i> 랜덤</a>
             <a href="#" class="link"><i class="nav-icon fa fa-info-circle"></i> 정보</a>
         </div>

@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
 	<title> 글쓰기 </title>
     <style type="text/css">
     	body {
@@ -43,7 +44,7 @@
 	
 <section>
 	<br>
-    <b><font size="6" color="gray">글쓰기</font></b>
+    <b><font size="6">글쓰기</font></b>
     <br>
     
     <form name="post" action="postCreate.do" method="POST" onsubmit="return check()">

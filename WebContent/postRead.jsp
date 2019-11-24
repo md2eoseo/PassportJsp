@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
 	<title> ${post.board_subject} </title>
     <style type="text/css">
         #wrap {

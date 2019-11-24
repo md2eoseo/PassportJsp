@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
 <title>Login</title>
 </head>
 <body>
