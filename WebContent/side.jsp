@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/main_style.css?aa">
+    <link rel="stylesheet" href="css/main_style.css?a">
     <style>
     	@import url('https://fonts.googleapis.com/css?family=Poiret+One&display=swap');
 	</style>
@@ -41,13 +41,11 @@
         </div>
 
         <!-- search bar -->
-        <form id="searchbar" name="searchbar" class="searchbar" action="https://www.google.com/search">
+        <form class="searchbar" action="postList.do" method="GET">
+        	<input type="hidden" name="opt" value="2">
             <div>
-                <input type="text" name="qt" id="search_text" placeholder="Google 검색">
-                <input type="hidden" name="q">
-                <span>
-                    <button id="search_submit" type="submit"><i class="fa fa-search"></i></button>
-                </span>
+                <input type="text" size="19" name="condition" placeholder="제목+내용 검색"/>&nbsp;
+                <button type="submit"><i class="fa fa-search"></i></button>
             </div>
         </form>
 

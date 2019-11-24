@@ -67,12 +67,8 @@ header {
     text-align: center;
 }
 
-#searchbar {
+.searchbar {
     margin-bottom: 40px;
-}
-
-#search_text {
-    width: 150px;
 }
 
 .menu_group {
