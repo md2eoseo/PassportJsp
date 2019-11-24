@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title> 내 글 </title>
+	<title> 내 글 (${spage}) </title>
     <style type="text/css">
         #wrap {
             width: 800px;
@@ -34,13 +34,13 @@
 		</div>
 		<br>
 		<div id="board">
-			<table width="800" border="2" bordercolor="black">
+			<table width="800" border="2" bordercolor="black" bgcolor="white">
 				<tr height="30">
-					<td>글번호</td>
-					<td>제목</td>
-					<td>작성자</td>
-					<td>작성일</td>
-					<td>조회수</td>
+					<td width="50">글번호</td>
+					<td width="450">제목</td>
+					<td width="120">작성자</td>
+					<td width="120">작성일</td>
+					<td width="60">조회수</td>
 				</tr>
 				<c:if test="${maxPage == 0}">
 					<tr>
@@ -65,8 +65,8 @@
 			</c:if>
 
 			<c:forEach var="pageNum" begin="${startPage}" end="${endPage}">
-				<c:if test="${pageNum == spage}">${pageNum}&nbsp;</c:if>
-				<c:if test="${pageNum != spage}"><a href='postMyList.do?page=${pageNum}'>${pageNum}</a>&nbsp;</c:if>
+				<c:if test="${pageNum == spage}"><span style="color:blue;">${pageNum}&nbsp;</span></c:if>
+				<c:if test="${pageNum != spage}"><a href='postMyList.do?page=${pageNum}'>${pageNum}&nbsp;</a></c:if>
 			</c:forEach>
 
 			<c:if test="${endPage != maxPage}">

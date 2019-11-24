@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title> postRead </title>
+	<title> ${post.board_subject} </title>
     <style type="text/css">
         #wrap {
             width: 800px;
@@ -15,7 +15,6 @@
         #post {
             text-align :center;
         }
-        
         #title {
             height : 16;
             font-family :'돋움';
@@ -35,9 +34,9 @@
 
 	<div id="wrap">
 		<br><br>
-			<table id="post" width="800" border="2" bordercolor="black">
+			<table id="post" width="800" border="2" bordercolor="black" bgcolor="white">
 				<tr>
-					<td id="title">작성일</td>
+					<td id="title" width="100">작성일</td>
 					<td>${post.board_date}</td>
 				</tr>
 				<tr>
@@ -49,7 +48,7 @@
 					<td>${post.board_subject}</td>
 				</tr>
 				<tr>
-					<td id="title">내 용</td>
+					<td id="title" height="400">내 용</td>
 					<td>${post.board_content}</td>
 				</tr>
 				<tr>
