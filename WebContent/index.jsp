@@ -27,22 +27,52 @@
 
 					<div class="login_block">
 						<h3>로그인</h3>
-						<form action="memberLogin.do" method="POST">
-							ID : <input type="text" name="id"> <br>
-							비밀번호 : <input type="password" name="password"> <br>
-							<input type="submit" value="로그인" class="submit_btn">
+						<form action="memberLogin.do" method="POST" class="login_form">
+							<table>
+								<tr>
+									<td>아이디</td>
+								    <td><input type="text" name="id"></td>
+								</tr>
+								<tr>
+									<td>비밀번호</td>
+								    <td><input type="password" name="password"></td>
+								</tr>
+								<tr>
+									<td colspan="2"><input type="submit" value="로그인" class="submit_btn"></td>
+								</tr>
+							</table>
 						</form>
 					</div>
 					<hr />
 
 					<div class="signup_block">
 						<h3>회원가입</h3>
-						<form action="memberInsert.do" method="POST">
-							ID : <input type="text" name="id"> (10자 제한)<br>
-							비밀번호 : <input type="password" name="password"> (10자 제한)<br>
-							이름 : <input type="text" name="name"> (10자 제한)<br>
-							Email : <input type="text" name="mail" class="input_mail"> (20자 제한)<br> 
-							<input type="submit" value="회원가입" class="submit_btn">
+						<form action="memberInsert.do" method="POST" class="signup_form">
+							<table>
+								<tr>
+									<td>아이디</td>
+								    <td><input type="text" name="id"></td>
+								    <td>(10자 제한)</td>
+								</tr>
+								<tr>
+									<td>비밀번호</td>
+								    <td><input type="password" name="password"></td>
+								    <td>(10자 제한)</td>
+								</tr>
+								<tr>
+									<td>이름</td>
+								    <td><input type="text" name="name"></td>
+								    <td>(10자 제한)</td>
+								</tr>
+								<tr>
+									<td>이메일</td>
+								    <td><input type="text" name="mail"></td>
+								    <td>(20자 제한)</td>
+								</tr>
+								<tr>
+									<td colspan="3"><input type="submit" value="회원가입" class="submit_btn"></td>
+								</tr>
+							</table>
 						</form>
 					</div>
 				</article>

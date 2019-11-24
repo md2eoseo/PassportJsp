@@ -18,7 +18,7 @@ public class MemberInsertController implements Controller {
 		// error
 		if(id.isEmpty() || password.isEmpty() || name.isEmpty() || mail.isEmpty()) {
 			req.setAttribute("error", "입력하지 않은 정보가 있습니다!");
-			HttpUtil.forward(req, resp, "/index.jsp");
+			HttpUtil.forward(req, resp, "/index.do");
 			return;
 		}
 		
@@ -32,6 +32,6 @@ public class MemberInsertController implements Controller {
 		service.memberInsert(member);
 		
 		req.setAttribute("info", id + "님 회원가입이 완료되었습니다!");
-		HttpUtil.forward(req, resp, "/index.jsp");
+		HttpUtil.forward(req, resp, "/index.do");
 	};
 }

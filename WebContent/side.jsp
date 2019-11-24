@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="css/main_style.css?c" />
+    <link rel="stylesheet" href="css/main_style.css?a" />
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
     <style>
     	@import url('https://fonts.googleapis.com/css?family=Poiret+One&display=swap');
@@ -28,12 +28,12 @@
         <div class="user_info">
             <div class="user_do">
             	<c:if test="${ sessionScope.userid == null }">
-            		<div><a href='/Passport/memberLogin.jsp' class='link'><i class='fa fa-sign-in'></i> 로그인</a></div>
-            		<div><a href='/Passport/memberInsert.jsp' class='link'>/회원 가입</a></div>
+            		<a href='/Passport/memberLogin.jsp' class='link'><div><i class='fa fa-sign-in'></i> 로그인</div></a>
+            		<a href='/Passport/memberInsert.jsp' class='link'><div>/ 회원가입</div></a>
             	</c:if>
             	<c:if test="${ sessionScope.userid != null }">
-            		<div><a href='/Passport/memberLogout.do' class='link'><i class='fa fa-sign-out'></i> 로그아웃</a></div>
-            		<div><a href='/Passport/post.jsp' class='link'><i class='fa fa-book'></i> 글쓰기</a></div>
+            		<a href='/Passport/memberLogout.do' class='link'><div><i class='fa fa-sign-out'></i> 로그아웃</div></a>
+            		<a href='/Passport/post.jsp' class='link'><div><i class='fa fa-book'></i> 글쓰기</div></a>
             	</c:if>
             </div>
             <div class="signinuser_info">
