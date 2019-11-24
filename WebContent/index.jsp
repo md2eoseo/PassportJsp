@@ -4,7 +4,6 @@
 <html>
 <head><title> Passport </title></head>
 <body>
-	<!-- <script type="text/javascript">location.href = "index.do";</script> -->
 
 	<jsp:include page="side.jsp" flush="false"/>
 

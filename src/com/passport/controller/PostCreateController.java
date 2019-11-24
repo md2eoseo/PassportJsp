@@ -32,9 +32,10 @@ public void execute(HttpServletRequest req, HttpServletResponse resp) throws Ser
 		
 		if(status == 1) {
 			req.setAttribute("info", board_id + "님이 글을 작성했습니다!");
-			HttpUtil.forward(req, resp, "/postList.jsp");
+			HttpUtil.forward(req, resp, "/postList.do");
 		} else if(status == -1) {
 			req.setAttribute("error", "글쓰기 실패!");
+			HttpUtil.forward(req, resp, "/postList.do");
 		}
 		
 //		// 업로드 파일 사이즈

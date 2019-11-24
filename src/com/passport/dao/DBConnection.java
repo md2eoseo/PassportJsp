@@ -203,13 +203,13 @@ public class DBConnection
     }
 	
 	public int postCreate(PostVO post) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
 		try {
-			conn = DBConnection.getConnection();
-			System.out.println(getSeq() + " " + post.getBoard_subject());
+			conn = getConnection();
 			pstmt = conn.prepareStatement("insert into POST values(?,?,?,?,?,?,?,?,?,sysdate)");
 			pstmt.setInt(1, getSeq());
 			pstmt.setString(2, post.getBoard_id());
-			System.out.println("1");
 			pstmt.setString(3, post.getBoard_subject());
 			pstmt.setString(4, post.getBoard_content());
 			pstmt.setString(5, post.getBoard_file());

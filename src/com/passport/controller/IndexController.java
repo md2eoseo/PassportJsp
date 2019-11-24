@@ -19,7 +19,7 @@ public class IndexController implements Controller {
         ArrayList<PostVO> list =  dbcp.postIndex();
         req.setAttribute("list", list);
 
-        HttpUtil.forward(req, resp, "/index.jsp");
+        HttpUtil.forward(req, resp, "index.jsp");
 	}
 
 }
