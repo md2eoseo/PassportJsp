@@ -60,7 +60,7 @@ public class PostMyListController implements Controller {
 	        req.setAttribute("listCount", listCount);
 	        req.setAttribute("list", list);
 
-	        HttpUtil.forward(req, resp, "/mypost.jsp");
+	        HttpUtil.forward(req, resp, "/postMyList.jsp");
 		}
 	}
 }

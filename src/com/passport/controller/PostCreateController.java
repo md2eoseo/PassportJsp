@@ -32,7 +32,7 @@ public void execute(HttpServletRequest req, HttpServletResponse resp) throws Ser
 		
 		if(status == 1) {
 			req.setAttribute("info", board_id + "님이 글을 작성했습니다!");
-			HttpUtil.forward(req, resp, "/posts.jsp");
+			HttpUtil.forward(req, resp, "/postList.jsp");
 		} else if(status == -1) {
 			req.setAttribute("error", "글쓰기 실패!");
 		}
