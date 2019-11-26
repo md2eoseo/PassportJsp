@@ -29,9 +29,14 @@ public class MemberInsertController implements Controller {
 		member.setMail(mail);
 		
 		MemberService service = MemberService.getInstance();
-		service.memberInsert(member);
+		if(service.memberInsert(member)) {
+			req.setAttribute("info", id + "님 회원가입이 완료되었습니다!");
+			HttpUtil.forward(req, resp, "/index.do");
+		} else {
+			req.setAttribute("error", id + "는 이미 존재하는 아이디입니다!");
+			HttpUtil.forward(req, resp, "/index.do");
+		}
 		
-		req.setAttribute("info", id + "님 회원가입이 완료되었습니다!");
-		HttpUtil.forward(req, resp, "/index.do");
+		
 	};
 }

@@ -25,7 +25,7 @@
 	<jsp:include page="side.jsp" flush="false"/>
 
 	<div id="wrap">
-		<br>
+		<br><br><b><div style="font: 36px 'Poiret One';">내 글</div></b>
 		<div class="error_block">${ error }</div>
 		<div class="info_block">${ info }</div>
 		<div id="topForm">

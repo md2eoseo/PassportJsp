@@ -14,8 +14,8 @@ public class MemberService {
 		return service;
 	}
 	
-	public void memberInsert(MemberVO member) {
-		dbcp.memberInsert(member);
+	public boolean memberInsert(MemberVO member) {
+		return dbcp.memberInsert(member);
 	}
 	
 	public MemberVO memberSearch(String id) {

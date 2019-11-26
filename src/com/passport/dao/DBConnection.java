@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -82,7 +83,7 @@ public class DBConnection
 //		}
 //	}
 	
-	public void memberInsert(MemberVO member) {
+	public boolean memberInsert(MemberVO member) {
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement("insert into member values(?,?,?,?)");
@@ -92,8 +93,10 @@ public class DBConnection
 			pstmt.setString(4, member.getMail());
 			pstmt.executeUpdate();	
 			close();
+			return true;
 		} catch (Exception ex) {
 			System.out.println("Error : " + ex);
+			return false;
 		}
 	}
 	
@@ -184,12 +187,10 @@ public class DBConnection
         try {
             conn = DBConnection.getConnection();
             
-            // 시퀀스 값을 가져온다. (DUAL : 시퀀스 값을 가져오기위한 임시 테이블)
             StringBuffer sql = new StringBuffer();
             sql.append("SELECT BOARD_NUM.NEXTVAL FROM DUAL");
             
             pstmt = conn.prepareStatement(sql.toString());
-
             rs = pstmt.executeQuery();
             
             if(rs.next())
