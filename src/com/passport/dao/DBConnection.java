@@ -295,6 +295,79 @@ public class DBConnection
         return result;
 	}
 	
+	public PostVO getPost(int boardNum) {
+		PostVO post = null;
+        
+        try {
+            conn = DBConnection.getConnection();
+            
+            StringBuffer sql = new StringBuffer();
+            sql.append("select * from POST where BOARD_NUM = ?");
+            
+            pstmt = conn.prepareStatement(sql.toString());
+            pstmt.setInt(1, boardNum);
+            
+            rs = pstmt.executeQuery();
+            if(rs.next()) {
+            	post = new PostVO();
+            	post.setBoard_num(boardNum);
+            	post.setBoard_id(rs.getString("BOARD_ID"));
+            	post.setBoard_subject(rs.getString("BOARD_SUBJECT"));
+            	post.setBoard_content(rs.getString("BOARD_CONTENT"));
+            	post.setBoard_file(rs.getString("BOARD_FILE"));
+            	post.setBoard_count(rs.getInt("BOARD_COUNT"));
+            	post.setBoard_group(rs.getString("BOARD_GROUP"));
+            	post.setBoard_re_lev(rs.getInt("BOARD_RE_LEV"));
+            	post.setBoard_re_seq(rs.getInt("BOARD_RE_SEQ"));
+            	post.setBoard_date(rs.getDate("BOARD_DATE"));
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e.getMessage());
+        }
+        close();
+        return post;
+	}
+	
+	public boolean postUpdate(PostVO post) {
+		boolean result = false;
+        
+        try{
+            conn = DBConnection.getConnection();
+            conn.setAutoCommit(false);
+            
+            StringBuffer sql = new StringBuffer();
+            sql.append("UPDATE POST SET");
+            sql.append(" BOARD_SUBJECT=?");
+            sql.append(" ,BOARD_CONTENT=?");
+            sql.append(" ,BOARD_FILE=?");
+            sql.append(" ,BOARD_DATE=SYSDATE ");
+            sql.append("WHERE BOARD_NUM=?");
+ 
+            pstmt = conn.prepareStatement(sql.toString());
+            pstmt.setString(1, post.getBoard_subject());
+            pstmt.setString(2, post.getBoard_content());
+            pstmt.setString(3, post.getBoard_file());
+            pstmt.setInt(4, post.getBoard_num());
+            
+            int flag = pstmt.executeUpdate();
+            if(flag > 0){
+                result = true;
+                conn.commit();
+            }
+            
+        } catch (Exception e) {
+            try {
+                conn.rollback();
+            } catch (SQLException sqle) {
+                sqle.printStackTrace();
+            }
+            throw new RuntimeException(e.getMessage());
+        }
+    
+        close();
+        return result;
+	}
+	
 	public ArrayList<PostVO> postList(HashMap<String, Object> listOpt){
         ArrayList<PostVO> list = new ArrayList<PostVO>();
         
@@ -797,4 +870,5 @@ public class DBConnection
             throw new RuntimeException(e.getMessage());
         }
     }
+	
 }

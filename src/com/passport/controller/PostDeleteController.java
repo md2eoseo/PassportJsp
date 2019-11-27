@@ -1,6 +1,5 @@
 package com.passport.controller;
 
-import java.io.File;
 import java.io.IOException;
 
 import javax.servlet.ServletException;

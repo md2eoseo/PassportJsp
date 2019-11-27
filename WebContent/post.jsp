@@ -22,13 +22,7 @@
     	    alert("제목을 입력해 주세요.");
     	    post.board_subject.focus();
     	    return false;
-    	  }
-    	  else if(post.board_content.value == "") {
-    	    alert("내용을 입력해 주세요.");
-    	    post.board_content.focus();
-    	    return false;
-    	  }
-    	  else return true;
+    	  } else return true;
     	}
     </script>
 </head>

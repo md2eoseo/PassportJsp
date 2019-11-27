@@ -59,7 +59,7 @@
 				<tr align="center" valign="middle">
 					<td colspan="5">
 						<c:if test="${ sessionScope.userid == post.board_id }">
-							<input type="button" value="수정">
+							<input type="button" value="수정" onclick="javascript:location.href='postUpdateForm.do?num=${post.board_num}&page=${pageNum}'">
 							<input type="button" value="삭제" onclick="javascript:location.href='postDelete.do?post=${post.board_num}'">
 						</c:if>
 						<input type="button" value="댓글">
