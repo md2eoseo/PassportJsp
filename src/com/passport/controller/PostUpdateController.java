@@ -44,7 +44,7 @@ public class PostUpdateController implements Controller {
                 	post.setBoard_file(existFile);
                 else {
                 	if(existFile != null){
-                        String filePath = uploadPath + "/" + fileName;
+                        String filePath = uploadPath + "/" + existFile;
                         File file = new File(filePath);
                         if(file.exists()) file.delete();
                 	}
