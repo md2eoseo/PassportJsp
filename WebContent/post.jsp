@@ -47,7 +47,7 @@
     <b><font size="6">글쓰기</font></b>
     <br><br><br>
     
-    <form name="post" action="postCreate.do" method="POST" onsubmit="return check()">
+    <form name="post" action="postCreate.do" method="POST" enctype="multipart/form-data" onsubmit="return check()">
     	<input type="hidden" name="board_id" value="${ sessionScope.userid }">
     	<table width="100%" border="1" bordercolor="lightgray" align="center" style="font: 15px '굴림';">
         	<tr>

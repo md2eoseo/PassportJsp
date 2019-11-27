@@ -203,7 +203,7 @@ public class DBConnection
         return result;    
     }
 	
-	public int postCreate(PostVO post) {
+	public boolean postCreate(PostVO post) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		try {
@@ -220,11 +220,11 @@ public class DBConnection
             pstmt.setInt(9, 0);
 			pstmt.executeUpdate();
 			close();
-			return 1;
+			return true;
 		} catch (Exception ex) {
 			System.out.println("Error : " + ex);
 			close();
-			return -1;
+			return false;
 		}
 	}
 	

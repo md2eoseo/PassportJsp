@@ -35,7 +35,4 @@ public class MemberService {
 		return dbcp.memberLogin(id, password);
 	}
 	
-	public int postCreate(PostVO post) {
-		return dbcp.postCreate(post);
-	}
 }

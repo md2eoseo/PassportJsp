@@ -13,7 +13,7 @@ public class PostService {
 		return service;
 	}
 	
-	public int postCreate(PostVO post) {
+	public boolean postCreate(PostVO post) {
 		return dbcp.postCreate(post);
 	}
 	
