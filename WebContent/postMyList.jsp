@@ -4,7 +4,7 @@
 <html>
 <head>
 	<link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
-	<title> 내 글 (${spage}) </title>
+	<title> Passport | 내 글 (${spage}) </title>
     <style type="text/css">
         #wrap {
             width: 800px;

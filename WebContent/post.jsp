@@ -4,7 +4,7 @@
 <html>
 <head>
 	<link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
-	<title> 글쓰기 </title>
+	<title> Passport | 글쓰기 </title>
     <style type="text/css">
     	body {
     		background: white;
