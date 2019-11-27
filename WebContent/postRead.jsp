@@ -58,6 +58,10 @@
 				</tr>
 				<tr align="center" valign="middle">
 					<td colspan="5">
+						<c:if test="${ sessionScope.userid == post.board_id }">
+							<input type="button" value="수정">
+							<input type="button" value="삭제" onclick="javascript:location.href='postDelete.do?post=${post.board_num}'">
+						</c:if>
 						<input type="button" value="댓글">
 						<c:if test="${ pageNum != null }">
 							<input type="button" value="목록" onclick="javascript:location.href='postList.do?page=${pageNum}'">

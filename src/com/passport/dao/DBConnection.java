@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.io.File;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -226,6 +227,72 @@ public class DBConnection
 			close();
 			return false;
 		}
+	}
+	
+	public String getFileName(int boardNum){
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+        String fileName = null;
+        
+        try {
+            conn = DBConnection.getConnection();
+            
+            StringBuffer sql = new StringBuffer();
+            sql.append("SELECT BOARD_FILE from POST where BOARD_NUM=?");
+            
+            pstmt = conn.prepareStatement(sql.toString());
+            pstmt.setInt(1, boardNum);
+            
+            rs = pstmt.executeQuery();
+            if(rs.next()) fileName = rs.getString("BOARD_FILE");
+            
+        } catch (Exception e) {
+            throw new RuntimeException(e.getMessage());
+        }
+        
+        close();
+        return fileName;
+    }
+	
+	public boolean postDelete(int boardNum, String folder) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		boolean result = false;
+		 
+        try {
+            conn = DBConnection.getConnection();
+            conn.setAutoCommit(false);
+ 
+            StringBuffer sql = new StringBuffer();
+            sql.append("DELETE from POST where BOARD_NUM=?");
+            
+            pstmt = conn.prepareStatement(sql.toString());
+            pstmt.setInt(1, boardNum);
+
+            String fileName = getFileName(boardNum);
+            int flag = pstmt.executeUpdate();
+            if(flag > 0){
+                result = true;
+                conn.commit();
+            }  
+            
+            if(fileName != null){
+                String filePath = folder + "/" + fileName;
+                File file = new File(filePath);
+                if(file.exists()) file.delete();
+            }
+
+        } catch (Exception e) {
+        	try {
+                conn.rollback();
+            } catch (SQLException sqle) {
+                sqle.printStackTrace();
+            }
+            throw new RuntimeException(e.getMessage());
+        }
+        
+        close();
+        return result;
 	}
 	
 	public ArrayList<PostVO> postList(HashMap<String, Object> listOpt){

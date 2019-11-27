@@ -22,6 +22,7 @@ public class FrontController extends HttpServlet {
 		list.put("/memberLogout.do", new MemberLogoutController());
 //		list.put("/memberList.do", new MemberListController());
 		list.put("/postCreate.do", new PostCreateController());
+		list.put("/postDelete.do", new PostDeleteController());
 		list.put("/postList.do", new PostListController());
 		list.put("/postRead.do", new PostReadController());
 		list.put("/postMyList.do", new PostMyListController());

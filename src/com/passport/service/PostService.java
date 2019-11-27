@@ -17,6 +17,10 @@ public class PostService {
 		return dbcp.postCreate(post);
 	}
 	
+	public boolean postDelete(int postNum, String folder) {
+		return dbcp.postDelete(postNum, folder);
+	}
+	
 	public PostVO postRead(int board_num) {
 		return dbcp.postRead(board_num);
 	}
