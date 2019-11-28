@@ -42,6 +42,12 @@
 					<td id="title" width="100">작성일</td>
 					<td>${post.board_date}</td>
 				</tr>
+				<c:if test="${ post.board_modate != null }">
+					<tr>
+						<td id="title" width="100">수정일</td>
+						<td>${post.board_modate}</td>
+					</tr>
+				</c:if>
 				<tr>
 					<td id="title">작성자</td>
 					<td>${post.board_id}</td>

@@ -54,7 +54,7 @@
 	        </tr>
     	    <tr>
         	    <td id="title">내 용</td>
-	            <td><textarea name="board_content" cols="150" rows="30"></textarea></td>        
+	            <td><textarea name="board_content" cols="150" rows="30" maxlength="2000"></textarea></td>        
         	</tr>
         	<tr>
             	<td id="title">파일첨부</td>

@@ -53,6 +53,8 @@ public void execute(HttpServletRequest req, HttpServletResponse resp) throws Ser
 		} catch (Exception e) {
 			e.printStackTrace();
             System.out.println("글 작성 오류 : " + e.getMessage());
+            req.setAttribute("error", "글쓰기 실패!");
+			HttpUtil.forward(req, resp, "/postList.do");
 		}
 	};
 	

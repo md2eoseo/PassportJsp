@@ -13,7 +13,8 @@ public class PostVO {
     private int board_re_lev;         // 댓글 깊이
     private int board_re_seq;         // 댓글 순서
     private int board_count;         // 조회수
-    private Date board_date;         // 작성일
+    private String board_date;         // 작성일
+    private String board_modate;         // 수정일
     
     public int getBoard_num() {
         return board_num;
@@ -69,11 +70,17 @@ public class PostVO {
     public void setBoard_count(int board_count) {
         this.board_count = board_count;
     }
-    public Date getBoard_date() {
+    public String getBoard_date() {
         return board_date;
     }
-    public void setBoard_date(Date board_date) {
+    public void setBoard_date(String board_date) {
         this.board_date = board_date;
     }
+	public String getBoard_modate() {
+		return board_modate;
+	}
+	public void setBoard_modate(String board_modate) {
+		this.board_modate = board_modate;
+	}
 	
 }

@@ -66,8 +66,8 @@ public class PostUpdateController implements Controller {
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("글 수정 오류 : " + e.getMessage());
+            req.setAttribute("error", "글수정 실패!");
+			HttpUtil.forward(req, resp, "/postMyList.do");
         }
-
 	}
-
 }
