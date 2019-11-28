@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<% pageContext.setAttribute("br", "<br/>"); pageContext.setAttribute("cn", "\n"); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -50,7 +52,7 @@
 				</tr>
 				<tr>
 					<td id="title" height="400">내 용</td>
-					<td>${post.board_content}</td>
+					<td>${fn:replace(post.board_content, cn, br)}</td>
 				</tr>
 				<tr>
 					<td id="title">첨부파일</td>
