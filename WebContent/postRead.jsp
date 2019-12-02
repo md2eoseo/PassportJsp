@@ -2,11 +2,15 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<% pageContext.setAttribute("br", "<br/>"); pageContext.setAttribute("cn", "\n"); %>
+<% 
+	pageContext.setAttribute("br", "<br/>");
+	pageContext.setAttribute("cn", "\n");
+%>
 <!DOCTYPE html>
 <html>
 <head>
 	<link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
+	<script src="http://maps.googleapis.com/maps/api/js"></script>
 	<title> Passport | ${post.board_subject} </title>
     <style type="text/css">
         #wrap {
@@ -24,18 +28,48 @@
             font-size : 12;
             text-align :center;
 		}
+		#googleMap {
+			border: 3px solid #000;
+			width: 420px;
+			height: 300px;
+		    position: fixed;
+			top: 30px;    
+		    left: 10px;
+		    margin: 0 auto 0 auto;
+		    margin-left: 280px;
+		}
     </style>
+    <script>
+		function initialize() {
+	
+			var LatLng = new google.maps.LatLng(37.6352621, 127.0760557);
+			var mapProp = {
+				center : LatLng,
+				zoom : 5,
+				mapTypeId : google.maps.MapTypeId.ROADMAP
+			};
+	
+			var map = new google.maps.Map(document.getElementById("googleMap"),
+					mapProp);
+	
+			var marker = new google.maps.Marker({
+				position : LatLng,
+				map : map,
+			});
+		}
+		google.maps.event.addDomListener(window, 'load', initialize);
+	</script>
     <script type="text/javascript">
         function writeForm(){
             location.href="post.jsp";
         }
-    </script>
+    </script>	
 </head>
 <body>    
 
 	<jsp:include page="side.jsp" flush="false"/>
 
-	<div id="wrap">
+	<div id="wrap" style="float: left;">
 		<br><br>
 			<table id="post" width="800" border="2" bordercolor="black" bgcolor="white">
 				<tr>
@@ -44,12 +78,12 @@
 				</tr>
 				<c:if test="${ post.board_modate != null }">
 					<tr>
-						<td id="title" width="100">수정일</td>
+						<td id="title">수정일</td>
 						<td>${post.board_modate}</td>
 					</tr>
 				</c:if>
 				<tr>
-					<td id="title">작성자</td>
+					<td id="title">글쓴이</td>
 					<td>${post.board_id}</td>
 				</tr>
 				<tr>
@@ -58,7 +92,7 @@
 				</tr>
 				<tr>
 					<td id="title" height="400">내 용</td>
-					<td>${fn:replace(post.board_content, cn, br)}</td>
+					<td style="word-break: break-all;">${fn:replace(post.board_content, cn, br)}</td>
 				</tr>
 				<tr>
 					<td id="title">첨부파일</td>
@@ -80,6 +114,8 @@
 					</td>
 				</tr>
 			</table>
+	</div>
+	<div id="googleMap">
 	</div>
 </body>
 </html>

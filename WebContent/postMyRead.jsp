@@ -44,12 +44,12 @@
 				</tr>
 				<c:if test="${ post.board_modate != null }">
 					<tr>
-						<td id="title" width="100">수정일</td>
+						<td id="title">수정일</td>
 						<td>${post.board_modate}</td>
 					</tr>
 				</c:if>
 				<tr>
-					<td id="title">작성자</td>
+					<td id="title">글쓴이</td>
 					<td>${post.board_id}</td>
 				</tr>
 				<tr>
@@ -58,7 +58,7 @@
 				</tr>
 				<tr>
 					<td id="title" height="400">내 용</td>
-					<td>${fn:replace(post.board_content, cn, br)}</td>
+					<td style="word-break: break-all;">${fn:replace(post.board_content, cn, br)}</td>
 				</tr>
 				<tr>
 					<td id="title">첨부파일</td>

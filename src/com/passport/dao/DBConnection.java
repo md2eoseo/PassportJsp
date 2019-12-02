@@ -209,7 +209,7 @@ public class DBConnection
 		PreparedStatement pstmt = null;
 		try {
 			conn = getConnection();
-			pstmt = conn.prepareStatement("insert into POST values(?,?,?,?,?,?,?,?,?,(SELECT TO_CHAR(SYSDATE, 'YYYY/MM/DD HH24:MI:SS') FROM DUAL))");
+			pstmt = conn.prepareStatement("insert into POST values(?,?,?,?,?,?,?,?,?,(SELECT TO_CHAR(SYSDATE, 'YYYY/MM/DD HH24:MI:SS') FROM DUAL),?)");
 			pstmt.setInt(1, getSeq());
 			pstmt.setString(2, post.getBoard_id());
 			pstmt.setString(3, post.getBoard_subject());
@@ -219,6 +219,7 @@ public class DBConnection
             pstmt.setInt(7, 0);
             pstmt.setInt(8, 0);
             pstmt.setInt(9, 0);
+            pstmt.setString(10, null);
 			pstmt.executeUpdate();
 			close();
 			return true;
