@@ -98,11 +98,13 @@
 					<td>${post.board_subject}</td>
 				</tr>
 				<tr>
-					<td id="title" height="400">내 용</td>
-					<td style="word-break: break-all;">${fn:replace(post.board_content, cn, br)}</td>
+					<td colspan="2"><img src="FileDownload.do?file_name=${post.board_file}" alt="${post.board_file}" height="200px"></td>
 				</tr>
 				<tr>
-					<td id="title">첨부파일</td>
+					<td colspan="2" style="word-break: break-all;" height="100">${fn:replace(post.board_content, cn, br)}</td>
+				</tr>
+				<tr>
+					<td id="title">다운로드</td>
 					<td><a href='FileDownload.do?file_name=${post.board_file}'>${post.board_file}</a></td>
 				</tr>
 				<tr align="center" valign="middle">
