@@ -17,7 +17,9 @@ public class IndexController implements Controller {
 		// TODO Auto-generated method stub
         DBConnection dbcp = DBConnection.getInstance();
         ArrayList<PostVO> list =  dbcp.postIndex();
+        int user = dbcp.userInfo((String) req.getSession().getAttribute("userid"));
         req.setAttribute("list", list);
+        req.setAttribute("user", user);
 
         HttpUtil.forward(req, resp, "index.jsp");
 	}

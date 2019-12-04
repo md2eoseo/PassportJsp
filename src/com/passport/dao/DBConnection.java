@@ -6,7 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.io.File;
-import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -870,6 +869,32 @@ public class DBConnection
         close();
         return list;
     } 
+    
+    public int userInfo(String userid) {
+    	int user = 0;
+    	try {
+            conn = DBConnection.getConnection();
+            StringBuffer sql = new StringBuffer();
+            
+            sql.append("select COUNT(board_id) as cnt from POST where board_id=?");
+
+			pstmt = conn.prepareStatement(sql.toString());
+            pstmt.setString(1, userid);
+
+			sql.delete(0, sql.toString().length());
+
+			rs = pstmt.executeQuery();
+			
+			while(rs.next())
+				user = rs.getInt("cnt");
+
+            
+        } catch (Exception e) {
+            throw new RuntimeException(e.getMessage());
+        }
+        close();
+        return user;
+	}
     
     private void close(){
         try {
