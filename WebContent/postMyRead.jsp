@@ -7,6 +7,7 @@
 <html>
 <head>
 	<link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
+	<script src="http://maps.googleapis.com/maps/api/js"></script>
 	<title> Passport | ${post.board_subject} </title>
     <style type="text/css">
         #wrap {
@@ -24,7 +25,45 @@
             font-size : 12;
             text-align :center;
 		}
+		#googleMap {
+			border: 3px solid #000;
+			width: 420px;
+			height: 300px;
+		    position: fixed;
+			top: 30px;    
+		    left: 10px;
+		    margin: 0 auto 0 auto;
+		    margin-left: 280px;
+		}
     </style>
+    <script>
+		function initialize() {
+	
+			var markerstring = "${post.board_markers}";
+			var markers = markerstring.split(') ');
+			for(var i = 0; i < markers.length; i++ )
+				markers[i] = markers[i].substr(1, markers[i].length-1);
+			var LatLng = new google.maps.LatLng(markers[0].split(', ')[0], markers[0].split(', ')[1]);
+			
+			var mapProp = {
+				center : LatLng,
+				zoom : 12,
+				mapTypeId : google.maps.MapTypeId.ROADMAP
+			};
+	
+			var map = new google.maps.Map(document.getElementById("googleMap"),
+					mapProp);
+	
+			var board_marker = [];
+			for(var i = 0; i < markers.length ; i++ ){
+				board_marker += new google.maps.Marker({
+					position : new google.maps.LatLng(markers[i].split(', ')[0], markers[i].split(', ')[1]),
+					map : map,
+				});
+			}
+		}
+		google.maps.event.addDomListener(window, 'load', initialize);
+	</script>
     <script type="text/javascript">
         function writeForm(){
             location.href="post.jsp";
@@ -35,7 +74,7 @@
 
 	<jsp:include page="side.jsp" flush="false"/>
 
-	<div id="wrap">
+	<div id="wrap" style="float: left;">
 		<br><br>
 			<table id="post" width="800" border="2" bordercolor="black" bgcolor="white">
 				<tr>
@@ -76,5 +115,8 @@
 				</tr>
 			</table>
 	</div>
+	<c:if test="${ post.board_markers != null }">
+		<div id="googleMap"></div>
+	</c:if>
 </body>
 </html>

@@ -2,10 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<% 
-	pageContext.setAttribute("br", "<br/>");
-	pageContext.setAttribute("cn", "\n");
-%>
+<% pageContext.setAttribute("br", "<br/>"); pageContext.setAttribute("cn", "\n"); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -42,20 +39,28 @@
     <script>
 		function initialize() {
 	
-			var LatLng = new google.maps.LatLng(37.6352621, 127.0760557);
+			var markerstring = "${post.board_markers}";
+			var markers = markerstring.split(') ');
+			for(var i = 0; i < markers.length; i++ )
+				markers[i] = markers[i].substr(1, markers[i].length-1);
+			var LatLng = new google.maps.LatLng(markers[0].split(', ')[0], markers[0].split(', ')[1]);
+			
 			var mapProp = {
 				center : LatLng,
-				zoom : 5,
+				zoom : 12,
 				mapTypeId : google.maps.MapTypeId.ROADMAP
 			};
 	
 			var map = new google.maps.Map(document.getElementById("googleMap"),
 					mapProp);
 	
-			var marker = new google.maps.Marker({
-				position : LatLng,
-				map : map,
-			});
+			var board_marker = [];
+			for(var i = 0; i < markers.length ; i++ ){
+				board_marker += new google.maps.Marker({
+					position : new google.maps.LatLng(markers[i].split(', ')[0], markers[i].split(', ')[1]),
+					map : map,
+				});
+			}
 		}
 		google.maps.event.addDomListener(window, 'load', initialize);
 	</script>
@@ -115,7 +120,8 @@
 				</tr>
 			</table>
 	</div>
-	<div id="googleMap">
-	</div>
+	<c:if test="${ post.board_markers != null }">
+		<div id="googleMap"></div>
+	</c:if>
 </body>
 </html>

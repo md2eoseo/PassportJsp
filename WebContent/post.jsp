@@ -48,6 +48,8 @@
 			
 			var markers = [];
 			
+			var test;
+			
 			function setMapOnAll(map) {
 			    for (var i = 0; i < markers.length; i++) {
 			      markers[i].setMap(map);
@@ -66,7 +68,6 @@
 			google.maps.event.addListener(map, "click", function (event) {
 		        var latitude = event.latLng.lat();
 		        var longitude = event.latLng.lng();
-		        console.log( latitude + ', ' + longitude );
 		        
 		        LatLng = new google.maps.LatLng(latitude, longitude);
 		        var marker = new google.maps.Marker({
@@ -75,6 +76,11 @@
 				});
 		        
 		        markers.push(marker);
+		        // console.log(LatLng.toString());
+		        console.log(marker.getPosition().toString());
+		        test = markers[markers.length-1].getPosition().toString();
+		        document.post.board_markers.value+=test + ' ';
+				
 		        map.panTo(LatLng);
 		        /* radius = new google.maps.Circle({map: map,
 		            radius: 100,
@@ -92,15 +98,22 @@
 		    // 마커 제거 버튼
 			document.getElementById("delete_marker").addEventListener("click", function(){
 				markers.pop().setMap(null);
+				for(var i=0; i<markers.length ; i++){
+		        	test = markers[i].getPosition().toString();
+		        	if(i==0)
+		        		document.post.board_markers.value = test + ' ';
+		        	else
+		        		document.post.board_markers.value += test + ' ';
+				}
 	        });
 			document.getElementById("delete_all_marker").addEventListener("click", function(){
 				deleteMarkers();
+				document.post.board_markers.value = '';
 	        });
 		}
 	    
-	    
 		google.maps.event.addDomListener(window, 'load', initialize);
-
+		
     </script>
 </head>
 <body style="background: white;">
@@ -135,7 +148,7 @@
 	        	</tr>
 	        	<tr>
 	            	<td id="title">파일첨부</td>
-		            <td><input type="file" name="board_file" /></td>    
+		            <td><input type="file" name="board_file" /><input type="text" name="board_markers" size="40" value=""></td>    
 	        	</tr>
 		        <tr align="center" valign="middle">
 	    	        <td colspan="5">

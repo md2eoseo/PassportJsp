@@ -209,7 +209,7 @@ public class DBConnection
 		PreparedStatement pstmt = null;
 		try {
 			conn = getConnection();
-			pstmt = conn.prepareStatement("insert into POST values(?,?,?,?,?,?,?,?,?,(SELECT TO_CHAR(SYSDATE, 'YYYY/MM/DD HH24:MI:SS') FROM DUAL),?)");
+			pstmt = conn.prepareStatement("insert into POST values(?,?,?,?,?,?,?,?,?,(SELECT TO_CHAR(SYSDATE, 'YYYY/MM/DD HH24:MI:SS') FROM DUAL),?,?)");
 			pstmt.setInt(1, getSeq());
 			pstmt.setString(2, post.getBoard_id());
 			pstmt.setString(3, post.getBoard_subject());
@@ -220,6 +220,7 @@ public class DBConnection
             pstmt.setInt(8, 0);
             pstmt.setInt(9, 0);
             pstmt.setString(10, null);
+            pstmt.setString(11, post.getBoard_markers());
 			pstmt.executeUpdate();
 			close();
 			return true;
@@ -583,6 +584,7 @@ public class DBConnection
             	post.setBoard_re_seq(rs.getInt("BOARD_RE_SEQ"));
             	post.setBoard_date(rs.getString("BOARD_DATE"));
                 post.setBoard_modate(rs.getString("BOARD_MODATE"));
+                post.setBoard_markers(rs.getString("BOARD_MARKERS"));
             }
         } catch (Exception e) {
             throw new RuntimeException(e.getMessage());
@@ -816,6 +818,7 @@ public class DBConnection
             	post.setBoard_re_seq(rs.getInt("BOARD_RE_SEQ"));
             	post.setBoard_date(rs.getString("BOARD_DATE"));
                 post.setBoard_modate(rs.getString("BOARD_MODATE"));
+                post.setBoard_markers(rs.getString("BOARD_MARKERS"));
             }
         } catch (Exception e) {
             throw new RuntimeException(e.getMessage());

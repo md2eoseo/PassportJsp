@@ -15,6 +15,7 @@ public class PostVO {
     private int board_count;         // 조회수
     private String board_date;         // 작성일
     private String board_modate;         // 수정일
+    private String board_markers;		// 마커
     
     public int getBoard_num() {
         return board_num;
@@ -81,6 +82,12 @@ public class PostVO {
 	}
 	public void setBoard_modate(String board_modate) {
 		this.board_modate = board_modate;
+	}
+	public String getBoard_markers() {
+		return board_markers;
+	}
+	public void setBoard_markers(String board_markers) {
+		this.board_markers = board_markers;
 	}
 	
 }

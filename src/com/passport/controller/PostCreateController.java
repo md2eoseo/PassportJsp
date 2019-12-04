@@ -38,11 +38,12 @@ public void execute(HttpServletRequest req, HttpServletResponse resp) throws Ser
 			post.setBoard_subject(multi.getParameter("board_subject"));
 			post.setBoard_content(multi.getParameter("board_content"));
 			post.setBoard_file(fileName);
+			post.setBoard_markers(multi.getParameter("board_markers"));
 			
 			PostService service = PostService.getInstance();
 			status = service.postCreate(post);
-			
 			if(status == true) {
+				System.out.println("글을 작성했습니다");
 				req.setAttribute("info", "글을 작성했습니다!");
 				HttpUtil.forward(req, resp, "/postList.do");
 			} else if(status == false) {
