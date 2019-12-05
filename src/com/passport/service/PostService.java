@@ -40,6 +40,8 @@ public class PostService {
 	public boolean updateCount(int board_num) {
 		return dbcp.updateCount(board_num);
 	}
-
 	
+	public PostVO postRandomRead() {
+		return dbcp.postRandomRead();
+	}
 }

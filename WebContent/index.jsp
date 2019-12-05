@@ -39,7 +39,7 @@
 								    <td><input type="text" name="id" value=${ id }></td>
 								</tr>
 								<tr>
-									<td>비밀번호</td>
+									<td>비밀번호&nbsp;</td>
 								    <td><input type="password" name="password"></td>
 								</tr>
 								<tr>
@@ -60,7 +60,7 @@
 								    <td>(10자 제한)</td>
 								</tr>
 								<tr>
-									<td>비밀번호</td>
+									<td>비밀번호&nbsp;</td>
 								    <td><input type="password" name="password"></td>
 								    <td>(10자 제한)</td>
 								</tr>
@@ -87,7 +87,7 @@
 					<div class="welcome_block">어서오세요.<br><span style="font-size:18px;">패스포트에서 추억을 공유하세요.</span></div>
 					<div class="error_block">${ error }</div>
 					<div class="info_block">${ info }</div>
-					<c:forEach var="mypost" items="${requestScope.mylist}" begin="0" end="5">
+					<c:forEach var="mypost" items="${requestScope.mylist}">
 		        		<a href="postMyRead.do?num=${mypost.board_num}"><article class="myarticle_block">
 		        		<span class="myarticle_subject">${mypost.board_subject}</span><br>
 		        		<span class="myarticle_id">${mypost.board_id}, ${mypost.board_date}</span></article></a>

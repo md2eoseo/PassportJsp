@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="css/main_style.css?hi" />
+    <link rel="stylesheet" href="css/main_style.css?h" />
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
     <style>
     	@import url('https://fonts.googleapis.com/css?family=Noto+Serif+KR|Roboto:700i&display=swap');
@@ -63,7 +63,7 @@
             <c:if test="${ sessionScope.userid != null }">
             	<a href="/Passport/postMyList.do" class="link"><i class="nav-icon fa fa-list-ul"></i> 내 글</a>
             </c:if>
-            <a href="#" class="link"><i class="nav-icon fa fa-bandcamp"></i> 랜덤</a>
+            <a href="/Passport/postRandomRead.do" class="link"><i class="nav-icon fa fa-bandcamp"></i> 랜덤</a>
             <a href="#" class="link"><i class="nav-icon fa fa-info-circle"></i> 정보</a>
         </div>
 
