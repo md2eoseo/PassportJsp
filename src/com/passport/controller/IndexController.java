@@ -17,10 +17,11 @@ public class IndexController implements Controller {
 		// TODO Auto-generated method stub
         DBConnection dbcp = DBConnection.getInstance();
         ArrayList<PostVO> list =  dbcp.postIndex();
-        int user = dbcp.userInfo((String) req.getSession().getAttribute("userid"));
+        ArrayList<PostVO> mylist =  dbcp.postMyIndex((String) req.getSession().getAttribute("userid"));
+        int user_postnum = dbcp.userInfo((String) req.getSession().getAttribute("userid"));
+        req.getSession().setAttribute("user_postnum", user_postnum);
         req.setAttribute("list", list);
-        req.setAttribute("user", user);
-
+        req.setAttribute("mylist", mylist);
         HttpUtil.forward(req, resp, "index.jsp");
 	}
 

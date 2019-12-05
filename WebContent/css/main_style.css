@@ -15,7 +15,7 @@
 ol, ul { list-style: none; }
 a { outline: 0; text-decoration: none; color: #000; }
 img { border: 0; }
-body { font: 12px 'Poiret One'; color: #000; 
+body { font: 12px 'Noto Serif KR'; color: #000;
 	/* background image 1000 x 667 */
 	background: url('../img/background.jpg');
 	background-size: 1580px;
@@ -40,7 +40,7 @@ header {
 
 #logo {
     text-align: center;
-    font-size: 36px;
+    font-size: 33px;
     margin-top: 10px;
     margin-bottom: 20px;
 }
@@ -61,7 +61,7 @@ header {
 
 .user_do div {
     display: inline-block;
-    font-size: 14px;
+    font-size: 15px;
     width: 80px;
     height: 30px;
     padding-top: 5px;
@@ -74,7 +74,8 @@ header {
 }
 
 .searchbar {
-    margin-bottom: 40px;
+    margin-top: 30px;
+    margin-bottom: 10px;
 }
 
 .menu_group {
@@ -87,7 +88,7 @@ header {
     display: block; /* Make the links appear below each other */
     padding: 12px; /* Add some padding */
     text-decoration: none; /* Remove underline from links */
-    font-size: 18px;
+    font-size: 20px;
     padding-left: 18px;
 }
   
@@ -96,9 +97,9 @@ header {
 }
 
 .sns_group {
-    font-size: 20px;
-    margin-top: 140px;
-    margin-left: 50px;
+    font-size: 30px;
+    margin-top: 110px;
+    margin-left: 40px;
 }
 
 /* section */
@@ -113,7 +114,7 @@ article {
     margin: 3px;
     background-color: #fff;
     /* data들어오기전 */
-    padding-top: 30px;
+    /* padding-top: 30px; */
     box-sizing: border-box;
 }
 
@@ -130,17 +131,19 @@ article.article_block {
 }
 
 article span.article_subject {
-	font-size: 28px;
+	font-size: 34px;
 	position: absolute;
 	left: 10px;
 	top: 10px;
+	opacity: 1.0;
 }
 
 article span.article_id {
-	font-size: 18px;
+	font-size: 20px;
 	position: absolute;
 	right: 10px;
 	bottom: 10px;
+	opacity: 1.0;
 }
 
 article.article_block:hover {

@@ -14,7 +14,12 @@
         <div class="">
         
         	<c:forEach var="post" items="${requestScope.list}" begin="0" end="1">
-        		<a href="postRead.do?num=${post.board_num}"><article class="article_block article_top">
+        		<a href="postRead.do?num=${post.board_num}">
+        		<c:choose>
+	        		<c:when test="${ post.board_file == null }"><article class="article_block article_top"></c:when>
+	        		<c:when test="${ post.board_file != null }"><article class="article_block article_top" 
+	        		style="background-image: url('FileDownload.do?file_name=${post.board_file}');background-size: cover;"></c:when>
+        		</c:choose>
         		<span class="article_subject">${post.board_subject}</span><br>
         		<span class="article_id">${post.board_id}, ${post.board_date}</span></article></a>
 			</c:forEach>
@@ -82,11 +87,21 @@
 					<div class="welcome_block">어서오세요.<br><span style="font-size:18px;">패스포트에서 추억을 공유하세요.</span></div>
 					<div class="error_block">${ error }</div>
 					<div class="info_block">${ info }</div>
+					<c:forEach var="mypost" items="${requestScope.mylist}" begin="0" end="5">
+		        		<a href="postMyRead.do?num=${mypost.board_num}"><article class="myarticle_block">
+		        		<span class="myarticle_subject">${mypost.board_subject}</span><br>
+		        		<span class="myarticle_id">${mypost.board_id}, ${mypost.board_date}</span></article></a>
+					</c:forEach>
 				</article>
 			</c:if>
 			
 			<c:forEach var="post" items="${requestScope.list}" begin="2" end="3">
-        		<a href="postRead.do?num=${post.board_num}"><article class="article_block">
+        		<a href="postRead.do?num=${post.board_num}">
+        		<c:choose>
+	        		<c:when test="${ post.board_file == null }"><article class="article_block"></c:when>
+	        		<c:when test="${ post.board_file != null }"><article class="article_block" 
+	        		style="background-image: url('FileDownload.do?file_name=${post.board_file}');background-size: cover;"></c:when>
+        		</c:choose>
         		<span class="article_subject">${post.board_subject}</span><br>
         		<span class="article_id">${post.board_id}, ${post.board_date}</span></article></a>
 			</c:forEach>

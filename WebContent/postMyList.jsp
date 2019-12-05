@@ -9,7 +9,7 @@
         #wrap {
             width: 800px;
             margin: 0 auto 0 auto;
-            font: 12px '돋움';
+            font: 12px 'Roboto';
             margin-left: 280px;
         }
         #topForm{
@@ -25,7 +25,7 @@
 	<jsp:include page="side.jsp" flush="false"/>
 
 	<div id="wrap">
-		<br><br><b><div style="font: 36px 'Poiret One';">내 글</div></b>
+		<br><br><b><div style="font-size: 36px;">내 글</div></b>
 		<div class="error_block">${ error }</div>
 		<div class="info_block">${ info }</div>
 		<div id="topForm">
@@ -39,7 +39,7 @@
 				<tr height="30">
 					<td width="50">글번호</td>
 					<td width="450">제목</td>
-					<td width="120">작성자</td>
+					<td width="120">글쓴이</td>
 					<td width="120">작성일</td>
 					<td width="60">조회수</td>
 				</tr>

@@ -13,7 +13,7 @@
         #wrap {
             width: 800px;
             margin: 0 auto 0 auto;
-            font: 12px '돋움';
+            font: 12px 'Roboto';
             margin-left: 280px;
         }
         #post {
@@ -21,7 +21,6 @@
         }
         #title {
             height : 16;
-            font-family :'돋움';
             font-size : 12;
             text-align :center;
 		}
@@ -48,7 +47,7 @@
 				
 				var mapProp = {
 					center : LatLng,
-					zoom : 12,
+					zoom : 5,
 					mapTypeId : google.maps.MapTypeId.ROADMAP
 				};
 		
@@ -97,24 +96,32 @@
 					<td id="title">제 목</td>
 					<td>${post.board_subject}</td>
 				</tr>
-				<tr>
-					<td colspan="2"><img src="FileDownload.do?file_name=${post.board_file}" alt="${post.board_file}" height="200px"></td>
-				</tr>
+				<c:if test="${ post.board_file != null }">
+					<tr>
+						<td colspan="2"><img src="FileDownload.do?file_name=${post.board_file}" alt="${post.board_file}" height="200px"></td>
+					</tr>
+				</c:if>
 				<tr>
 					<td colspan="2" style="word-break: break-all;" height="100">${fn:replace(post.board_content, cn, br)}</td>
 				</tr>
-				<tr>
-					<td id="title">다운로드</td>
-					<td><a href='FileDownload.do?file_name=${post.board_file}'>${post.board_file}</a></td>
-				</tr>
+				<c:if test="${ post.board_file != null }">
+					<tr>
+						<td id="title">다운로드</td>
+						<td><a href='FileDownload.do?file_name=${post.board_file}'>${post.board_file}</a></td>
+					</tr>
+				</c:if>
 				<tr align="center" valign="middle">
 					<td colspan="5">
 						<c:if test="${ sessionScope.userid == post.board_id }">
 							<input type="button" value="수정" onclick="javascript:location.href='postUpdateForm.do?num=${post.board_num}&page=${pageNum}'">
 							<input type="button" value="삭제" onclick="javascript:location.href='postDelete.do?post=${post.board_num}'">
 						</c:if>
-						<input type="button" value="댓글">
-						<input type="button" value="목록" onclick="javascript:location.href='postMyList.do?page=${pageNum}'">
+						<c:if test="${ pageNum != null }">
+							<input type="button" value="목록" onclick="javascript:location.href='postMyList.do?page=${pageNum}'">
+						</c:if>
+						<c:if test="${ pageNum == null }">
+							<input type="button" value="목록" onclick="javascript:location.href='index.do'">
+						</c:if>
 					</td>
 				</tr>
 			</table>

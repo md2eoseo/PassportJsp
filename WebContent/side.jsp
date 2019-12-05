@@ -11,10 +11,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="css/main_style.css?c" />
+    <link rel="stylesheet" href="css/main_style.css?hi" />
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
     <style>
-    	@import url('https://fonts.googleapis.com/css?family=Poiret+One&display=swap');
+    	@import url('https://fonts.googleapis.com/css?family=Noto+Serif+KR|Roboto:700i&display=swap');
 	</style>
 </head>
 <body>
@@ -40,7 +40,7 @@
 	            <c:if test="${ sessionScope.userid != null }">
 	            	<br>
 					<div>${ sessionScope.userid }님, 반갑습니다!</div>
-					<div>글 개수 : ${ requestScope.user }</div>
+					<div>${ sessionScope.user_postnum }개의 글</div>
 				</c:if>
             </div>
         </div>

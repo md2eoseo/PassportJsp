@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+import com.passport.dao.DBConnection;
 import com.passport.service.PostService;
 import com.passport.vo.PostVO;
 
@@ -16,10 +17,7 @@ public class PostCreateController implements Controller {
 
 public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException ,IOException {
 	
-//		String board_id = req.getParameter("board_id");
-//		String board_subject = req.getParameter("board_subject");
-//		String board_content = req.getParameter("board_content");
-//		String board_file = req.getParameter("board_file");
+		DBConnection dbcp = DBConnection.getInstance();
 		int fileSize = 5 * 1024 * 1024;
 		String uploadPath = req.getServletContext().getRealPath("/upload");
 		boolean status = false;
@@ -43,6 +41,8 @@ public void execute(HttpServletRequest req, HttpServletResponse resp) throws Ser
 			PostService service = PostService.getInstance();
 			status = service.postCreate(post);
 			if(status == true) {
+				int user_postnum = dbcp.userInfo((String) req.getSession().getAttribute("userid"));
+		        req.getSession().setAttribute("user_postnum", user_postnum);
 				System.out.println("글을 작성했습니다");
 				req.setAttribute("info", "글을 작성했습니다!");
 				HttpUtil.forward(req, resp, "/postList.do");
