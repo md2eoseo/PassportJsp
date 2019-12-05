@@ -114,7 +114,7 @@ article {
     margin: 3px;
     background-color: #fff;
     /* data들어오기전 */
-    /* padding-top: 30px; */
+    padding-top: 30px;
     box-sizing: border-box;
 }
 
@@ -154,6 +154,23 @@ article.article_block:hover {
 
 article.article_top {
     margin-top: 70px;
+}
+
+article.myarticle_block {
+	height: 42px;
+	border: 0px;
+	border-bottom: 2px solid #000;
+	padding-top: 0px;
+	margin-top: 15px;
+}
+
+article span.myarticle_subject {
+	font-size: 28px;
+	float: left;
+}
+
+article span.myarticle_id {
+	float: right;
 }
 
 article.member_block {
