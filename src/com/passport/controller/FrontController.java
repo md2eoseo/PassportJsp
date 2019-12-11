@@ -15,12 +15,8 @@ public class FrontController extends HttpServlet {
 		charset = sc.getInitParameter("charset");
 		list = new HashMap<String, Controller>();
 		list.put("/memberInsert.do", new MemberInsertController());
-//		list.put("/memberSearch.do", new MemberSearchController());
-//		list.put("/memberUpdate.do", new MemberUpdateController());
-//		list.put("/memberDelete.do", new MemberDeleteController());
 		list.put("/memberLogin.do", new MemberLoginController());
 		list.put("/memberLogout.do", new MemberLogoutController());
-//		list.put("/memberList.do", new MemberListController());
 		list.put("/postCreate.do", new PostCreateController());
 		list.put("/postDelete.do", new PostDeleteController());
 		list.put("/postUpdate.do", new PostUpdateController());
@@ -28,7 +24,6 @@ public class FrontController extends HttpServlet {
 		list.put("/postList.do", new PostListController());
 		list.put("/postRead.do", new PostReadController());
 		list.put("/postMyList.do", new PostMyListController());
-		list.put("/postMyRead.do", new PostMyReadController());
 		list.put("/index.do", new IndexController());
 		list.put("/FileDownload.do", new FileDownloadController());
 		list.put("/postRandomRead.do", new PostRandomReadController());

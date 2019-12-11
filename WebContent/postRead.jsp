@@ -117,7 +117,12 @@
 							<input type="button" value="삭제" onclick="javascript:location.href='postDelete.do?post=${post.board_num}'">
 						</c:if>
 						<c:if test="${ pageNum != null }">
-							<input type="button" value="목록" onclick="javascript:location.href='postList.do?page=${pageNum}'">
+							<c:if test="${ type eq 'all' }">
+								<input type="button" value="목록" onclick="javascript:location.href='postList.do?page=${pageNum}'">
+							</c:if>
+							<c:if test="${ type eq 'my' }">
+								<input type="button" value="목록" onclick="javascript:location.href='postMyList.do?page=${pageNum}'">
+							</c:if>
 						</c:if>
 						<c:if test="${ pageNum == null }">
 							<input type="button" value="목록" onclick="javascript:location.href='index.do'">

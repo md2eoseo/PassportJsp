@@ -88,9 +88,9 @@
 					<div class="error_block">${ error }</div>
 					<div class="info_block">${ info }</div>
 					<c:forEach var="mypost" items="${requestScope.mylist}">
-		        		<a href="postMyRead.do?num=${mypost.board_num}"><article class="myarticle_block">
+		        		<a href="postRead.do?num=${mypost.board_num}"><article class="myarticle_block">
 		        		<span class="myarticle_subject">${mypost.board_subject}</span><br>
-		        		<span class="myarticle_id">${mypost.board_id}, ${mypost.board_date}</span></article></a>
+		        		<span class="myarticle_id">${mypost.board_date}</span></article></a>
 					</c:forEach>
 				</article>
 			</c:if>

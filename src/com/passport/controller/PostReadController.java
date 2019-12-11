@@ -14,6 +14,7 @@ public class PostReadController implements Controller {
 	public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		int board_num = Integer.parseInt(req.getParameter("num"));
         String pageNum = req.getParameter("pageNum");
+        String type = req.getParameter("type");
         
         PostService service = PostService.getInstance();
         PostVO post = service.postRead(board_num);
@@ -21,6 +22,7 @@ public class PostReadController implements Controller {
         
         req.setAttribute("post", post);
         req.setAttribute("pageNum", pageNum);
+        req.setAttribute("type", type);
         
         if(result)
         	HttpUtil.forward(req, resp, "/postRead.jsp");

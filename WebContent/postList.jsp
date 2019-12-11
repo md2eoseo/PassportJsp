@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
@@ -31,8 +30,10 @@
 		<div class="info_block">${ info }</div>
 		<div id="topForm">
 			<c:if test="${ sessionScope.userid != null }">
-				<input type='button' value='글쓰기' onclick='javascript:location.href="post.jsp"'>
+				<input type='button' value='글쓰기' onclick='javascript:location.href="postCreate.jsp"'>
 			</c:if>
+			<!-- <button id="list_view"><i class="fa fa-bars" style="font-size: 30px;"></i></button>
+			<button id="grid_view"><i class="fa fa-th-large" style="font-size: 30px;"></i></button> -->
 		</div>
 		<br>
 		<div id="board">
@@ -52,7 +53,7 @@
 				<c:forEach var="post" items="${requestScope.list}">
 					<tr>
 						<td>${post.board_num}</td>
-						<td><a href="postRead.do?num=${post.board_num}&pageNum=${spage}">${post.board_subject}</a></td>
+						<td><a href="postRead.do?type=all&num=${post.board_num}&pageNum=${spage}">${post.board_subject}</a></td>
 						<td><a href="#">${post.board_id}</a></td>
 						<td>${post.board_date}</td>
 						<td>${post.board_count}</td>

@@ -30,7 +30,7 @@
 		<div class="info_block">${ info }</div>
 		<div id="topForm">
 			<c:if test="${ sessionScope.userid != null }">
-				<input type='button' value='글쓰기' onclick='javascript:location.href="post.jsp"'>
+				<input type='button' value='글쓰기' onclick='javascript:location.href="postCreate.jsp"'>
 			</c:if>
 		</div>
 		<br>
@@ -51,7 +51,7 @@
 				<c:forEach var="post" items="${requestScope.list}">
 					<tr>
 						<td>${post.board_num}</td>
-						<td><a href="postMyRead.do?num=${post.board_num}&pageNum=${spage}">${post.board_subject}</a></td>
+						<td><a href="postRead.do?type=my&num=${post.board_num}&pageNum=${spage}">${post.board_subject}</a></td>
 						<td><a href="#">${post.board_id}</a></td>
 						<td>${post.board_date}</td>
 						<td>${post.board_count}</td>

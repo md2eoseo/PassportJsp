@@ -20,6 +20,15 @@ body { font: 12px 'Noto Serif KR'; color: #000;
 	background: url('../img/background.jpg');
 	background-size: 1580px;
 }
+button:hover {
+  cursor: pointer;
+  box-shadow: 0px 0px 3px #666;
+}
+
+button.on {
+  color: white;
+  background-color: #ccc;
+}
 
 /* -----------------------------------------------------------------layout------------------------------------------------------------------ */
 /* header */
@@ -107,6 +116,32 @@ section {
     position: relative;
     margin-left: 205px;
     padding-top: 2%;
+}
+
+div.info {
+	border: 2px solid #000;
+    margin: 3px;
+    float: left;
+    width: 28%;
+    height: 300px;
+    animation: scale 1s 1;
+    opacity: 0.8;
+    transform: scale(1.0);
+    transition: 0.5s;
+    padding: 10px;
+    background-size: cover;
+    background-position: center;
+    
+}
+
+div.info:hover {
+    opacity: 1.0;
+    transform: scale(1.1);
+}
+
+h2.info {
+	font-size: 34px;
+	text-align: center;
 }
 
 article {

@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="css/main_style.css?mm" />
+    <link rel="stylesheet" href="css/main_style.css?m" />
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
     <style>
     	@import url('https://fonts.googleapis.com/css?family=Noto+Serif+KR|Roboto:700i&display=swap');
@@ -33,7 +33,7 @@
             	</c:if>
             	<c:if test="${ sessionScope.userid != null }">
             		<a href='/Passport/memberLogout.do' class='link'><div><i class='fa fa-sign-out'></i> 로그아웃</div></a>
-            		<a href='/Passport/post.jsp' class='link'><div><i class='fa fa-book'></i> 글쓰기</div></a>
+            		<a href='/Passport/postCreate.jsp' class='link'><div><i class='fa fa-book'></i> 글쓰기</div></a>
             	</c:if>
             </div>
             <div class="user_info">
@@ -64,14 +64,14 @@
             	<a href="/Passport/postMyList.do" class="link"><i class="nav-icon fa fa-list-ul"></i> 내 글</a>
             </c:if>
             <a href="/Passport/postRandomRead.do" class="link"><i class="nav-icon fa fa-bandcamp"></i> 랜덤</a>
-            <a href="#" class="link"><i class="nav-icon fa fa-info-circle"></i> 정보</a>
+            <a href="/Passport/info.jsp" class="link"><i class="nav-icon fa fa-info-circle"></i> 정보</a>
         </div>
 
         <!-- sns -->
         <div class="sns_group">
             <a href="/Passport/index.do" class="link"><i class="nav-icon fa fa-home"></i></a>
-            <a href="#" class="link"><i class="nav-icon fa fa-facebook"></i></a>
-            <a href="#" class="link"><i class="nav-icon fa fa-instagram"></i></a>
+            <a href="https://www.facebook.com/" class="link"><i class="nav-icon fa fa-facebook"></i></a>
+            <a href="https://www.instagram.com/" class="link"><i class="nav-icon fa fa-instagram"></i></a>
         </div>
     </header>
 </body>

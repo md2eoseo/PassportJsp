@@ -825,41 +825,6 @@ public class DBConnection
         return result;
 	}
     
-    public PostVO postMyRead(int board_num) {
-    	PostVO post = null;
-        
-        try {
-            conn = DBConnection.getConnection();
-            
-            StringBuffer sql = new StringBuffer();
-            sql.append("select * from POST where BOARD_NUM = ?");
-            
-            pstmt = conn.prepareStatement(sql.toString());
-            pstmt.setInt(1, board_num);
-            
-            rs = pstmt.executeQuery();
-            if(rs.next()) {
-            	post = new PostVO();
-            	post.setBoard_num(board_num);
-            	post.setBoard_id(rs.getString("BOARD_ID"));
-            	post.setBoard_subject(rs.getString("BOARD_SUBJECT"));
-            	post.setBoard_content(rs.getString("BOARD_CONTENT"));
-            	post.setBoard_file(rs.getString("BOARD_FILE"));
-            	post.setBoard_count(rs.getInt("BOARD_COUNT"));
-            	post.setBoard_group(rs.getString("BOARD_GROUP"));
-            	post.setBoard_re_lev(rs.getInt("BOARD_RE_LEV"));
-            	post.setBoard_re_seq(rs.getInt("BOARD_RE_SEQ"));
-            	post.setBoard_date(rs.getString("BOARD_DATE"));
-                post.setBoard_modate(rs.getString("BOARD_MODATE"));
-                post.setBoard_markers(rs.getString("BOARD_MARKERS"));
-            }
-        } catch (Exception e) {
-            throw new RuntimeException(e.getMessage());
-        }
-        close();
-        return post;
-	}
-    
     public ArrayList<PostVO> postIndex(){
         ArrayList<PostVO> list = new ArrayList<PostVO>();
         
