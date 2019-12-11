@@ -113,18 +113,18 @@
 				<tr align="center" valign="middle">
 					<td colspan="5">
 						<c:if test="${ sessionScope.userid == post.board_id }">
-							<input type="button" value="수정" onclick="javascript:location.href='postUpdateForm.do?num=${post.board_num}&page=${pageNum}'">
+							<input type="button" value="수정" onclick="javascript:location.href='postUpdateForm.do?num=${post.board_num}&page=${page}'">
 							<input type="button" value="삭제" onclick="javascript:location.href='postDelete.do?post=${post.board_num}'">
 						</c:if>
-						<c:if test="${ pageNum != null }">
+						<c:if test="${ page != null }">
 							<c:if test="${ type eq 'all' }">
-								<input type="button" value="목록" onclick="javascript:location.href='postList.do?page=${pageNum}'">
+								<input type="button" value="목록" onclick="javascript:location.href='postList.do?page=${page}'">
 							</c:if>
 							<c:if test="${ type eq 'my' }">
-								<input type="button" value="목록" onclick="javascript:location.href='postMyList.do?page=${pageNum}'">
+								<input type="button" value="목록" onclick="javascript:location.href='postMyList.do?page=${page}'">
 							</c:if>
 						</c:if>
-						<c:if test="${ pageNum == null }">
+						<c:if test="${ page == null }">
 							<input type="button" value="목록" onclick="javascript:location.href='index.do'">
 						</c:if>
 					</td>

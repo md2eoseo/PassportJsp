@@ -4,7 +4,7 @@
 <html>
 <head>
 	<link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
-	<title> Passport | 전체 글 (${spage}) </title>
+	<title> Passport | 전체 글 ${spage}페이지 </title>
     <style type="text/css">
         #wrap {
             width: 800px;
@@ -53,7 +53,7 @@
 				<c:forEach var="post" items="${requestScope.list}">
 					<tr>
 						<td>${post.board_num}</td>
-						<td><a href="postRead.do?type=all&num=${post.board_num}&pageNum=${spage}">${post.board_subject}</a></td>
+						<td><a href="postRead.do?type=all&num=${post.board_num}&page=${spage}">${post.board_subject}</a></td>
 						<td><a href="#">${post.board_id}</a></td>
 						<td>${post.board_date}</td>
 						<td>${post.board_count}</td>

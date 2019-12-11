@@ -13,7 +13,7 @@ public class PostReadController implements Controller {
 
 	public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		int board_num = Integer.parseInt(req.getParameter("num"));
-        String pageNum = req.getParameter("pageNum");
+        String page = req.getParameter("page");
         String type = req.getParameter("type");
         
         PostService service = PostService.getInstance();
@@ -21,7 +21,7 @@ public class PostReadController implements Controller {
         boolean result = service.updateCount(board_num);
         
         req.setAttribute("post", post);
-        req.setAttribute("pageNum", pageNum);
+        req.setAttribute("page", page);
         req.setAttribute("type", type);
         
         if(result)
