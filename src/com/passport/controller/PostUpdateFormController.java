@@ -11,17 +11,18 @@ import com.passport.vo.PostVO;
 
 public class PostUpdateFormController implements Controller {
 
-	@Override
 	public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String pageNum = req.getParameter("page");
-        String num = req.getParameter("num");
-        int boardNum = Integer.parseInt(num);
+		String type = req.getParameter("type");
+		String page = req.getParameter("page");
+        int boardNum = Integer.parseInt(req.getParameter("num"));
  
         PostService service = PostService.getInstance();
         PostVO post = service.getPost(boardNum);
         
+        req.setAttribute("boardNum", boardNum);
         req.setAttribute("post", post);
-        req.setAttribute("page", pageNum);
+        req.setAttribute("page", page);
+        req.setAttribute("type", type);
         
 		HttpUtil.forward(req, resp, "/postUpdate.jsp");
 	}

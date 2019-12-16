@@ -39,7 +39,7 @@
 	<section>
 		<br> <b><font size="6">글 수정</font></b> <br><br><br>
 
-		<form name="postUpdate" action="postUpdate.do?&page=${page}"
+		<form name="postUpdate" action="postUpdate.do?type=${type}&num=${boardNum}&page=${page}"
 			method="POST" enctype="multipart/form-data" onsubmit="return check()">
 			<input type="hidden" name="board_num" value="${post.board_num}" /> <input
 				type="hidden" name="existing_file" value="${post.board_file}" />
@@ -67,16 +67,9 @@
 				</tr>
 				<tr align="center" valign="middle">
 					<td colspan="5">
-						<input type="reset" value="작성취소">
+						<input type="reset" value="리셋">
 						<input type="submit" value="수정">
-						<c:choose>
-							<c:when test="${ page == '' }">
-								<input type="button" value="목록" onclick="javascript:location.href='index.do'">
-							</c:when>
-							<c:otherwise>
-								<input type="button" value="목록" onclick="javascript:location.href='postList.do?page=${page}'">
-							</c:otherwise>
-						</c:choose>
+						<input type="button" value="목록" onclick="javascript:location.href='postRead.do?type=${type}&num=${boardNum}'">
 					</td>
 				</tr>
 			</table>

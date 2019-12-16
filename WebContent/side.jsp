@@ -10,7 +10,7 @@
     <!-- 모바일기기의 물리적 화면 해상도를 웹페이지가 인식할 수 있게 해준다 -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
     <link rel="stylesheet" href="css/main_style.css?m" />
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
     <style>

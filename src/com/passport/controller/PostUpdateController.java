@@ -17,7 +17,6 @@ public class PostUpdateController implements Controller {
 
 	@Override
 	public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String pageNum = req.getParameter("pageNum");
         int fileSize= 5 * 1024 * 1024;
         String uploadPath = req.getServletContext().getRealPath("/upload");
         
@@ -55,13 +54,12 @@ public class PostUpdateController implements Controller {
             PostService service = PostService.getInstance();
             boolean result = service.postUpdate(post);
 
-            if(result == true) {
+            if(result == true)
     			req.setAttribute("info", "글을 수정했습니다!");
-    			HttpUtil.forward(req, resp, "/postMyRead.do?num="+num);
-    		} else if(result == false) {
+    		else if(result == false)
     			req.setAttribute("error", "글수정 실패!");
-    			HttpUtil.forward(req, resp, "/postMyList.do");
-    		}
+    			
+    		HttpUtil.forward(req, resp, "/postRead.do");
             
         } catch (Exception e) {
             e.printStackTrace();

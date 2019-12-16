@@ -47,9 +47,7 @@
 			var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
 			
 			var markers = [];
-			
-			var test;
-			
+						
 			function setMapOnAll(map) {
 			    for (var i = 0; i < markers.length; i++) {
 			      markers[i].setMap(map);
@@ -78,8 +76,7 @@
 		        markers.push(marker);
 		        // console.log(LatLng.toString());
 		        console.log(marker.getPosition().toString());
-		        test = markers[markers.length-1].getPosition().toString();
-		        document.post.board_markers.value+=test + ' ';
+		        document.post.board_markers.value += markers[markers.length-1].getPosition().toString() + ' ';
 				
 		        map.panTo(LatLng);
 		        /* radius = new google.maps.Circle({map: map,
@@ -98,12 +95,12 @@
 		    // 마커 제거 버튼
 			document.getElementById("delete_marker").addEventListener("click", function(){
 				markers.pop().setMap(null);
-				for(var i=0; i<markers.length ; i++){
-		        	test = markers[i].getPosition().toString();
-		        	if(i==0)
-		        		document.post.board_markers.value = test + ' ';
-		        	else
-		        		document.post.board_markers.value += test + ' ';
+				if(markers.length == 0)
+					document.post.board_markers.value = '';
+				else{
+					document.post.board_markers.value = '';
+					for(var i=0; i<markers.length ; i++)
+			        	document.post.board_markers.value += markers[i].getPosition().toString() + ' ';
 				}
 	        });
 			document.getElementById("delete_all_marker").addEventListener("click", function(){

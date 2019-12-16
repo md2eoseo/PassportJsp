@@ -76,6 +76,8 @@
 	<jsp:include page="side.jsp" flush="false"/>
 
 	<div id="wrap" style="float: left;">
+		<div class="error_block">${ error }</div>
+		<div class="info_block">${ info }</div>
 		<br><br>
 			<table id="post" width="800" border="2" bordercolor="black" bgcolor="white">
 				<tr>
@@ -113,7 +115,7 @@
 				<tr align="center" valign="middle">
 					<td colspan="5">
 						<c:if test="${ sessionScope.userid == post.board_id }">
-							<input type="button" value="수정" onclick="javascript:location.href='postUpdateForm.do?num=${post.board_num}&page=${page}'">
+							<input type="button" value="수정" onclick="javascript:location.href='postUpdateForm.do?type=${type}&num=${post.board_num}&page=${page}'">
 							<input type="button" value="삭제" onclick="javascript:location.href='postDelete.do?post=${post.board_num}'">
 						</c:if>
 						<c:if test="${ page != null }">
@@ -124,7 +126,7 @@
 								<input type="button" value="목록" onclick="javascript:location.href='postMyList.do?page=${page}'">
 							</c:if>
 						</c:if>
-						<c:if test="${ page == null }">
+						<c:if test="${ page eq null or page eq '' }">
 							<input type="button" value="목록" onclick="javascript:location.href='index.do'">
 						</c:if>
 					</td>
